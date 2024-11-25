@@ -61,3 +61,29 @@ class RectanglechipWidget2 extends StatelessWidget {
     );
   }
 }
+
+class RectanglechipWidget3 extends StatelessWidget {
+  final String title;
+  final int width;
+  const RectanglechipWidget3(
+      {super.key, required this.title, required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 7.w),
+      width: width.w,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(39),
+          border: Border.all(width: 2, color: Fblackcolor01)),
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+          child: Center(
+            child: Text(
+              title,
+              style: const TextStyle().fontsize(16),
+            ),
+          )),
+    );
+  }
+}
