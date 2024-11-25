@@ -23,10 +23,12 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      // tutroial.getdata(context);
-      ShowDailogWidget.offerdilog(context);
-    });
+    if (mounted) {
+      Future.delayed(const Duration(seconds: 2), () {
+        // tutroial.getdata(context);
+       ShowDailogWidget.offerdilog(context);
+      });
+    }
   }
 
   @override
