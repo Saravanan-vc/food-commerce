@@ -184,3 +184,156 @@ class OnboardingView2 extends StatelessWidget {
     );
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+class OnboardingViewHorizontal extends StatelessWidget {
+  const OnboardingViewHorizontal({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Center(
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Column(
+              children: [
+                const Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: Fbluecolor),
+                  height: 352.h,
+                  width: 100.w,
+                ),
+                SizedBox(height: 67.h),
+                Text(
+                  "Order from choosen chef",
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w900,
+                      color: Fblackcolor),
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  "Get all your loved foods in one once place,\nyou just place the orer we do the rest",
+                  style: TextStyle(
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.w900,
+                      color: Fblackcolor001),
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  child: AbuttonWidget(
+                      text: "NEXT",
+                      callback: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) =>
+                                const OnboardingViewHorizontal2()));
+                      }),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                AtextBwidget(
+                    text: "SKIP",
+                    ontap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              const OnboardingViewHorizontal2()));
+                    },
+                    color: Fblackcolor001),
+              ],
+            ),
+          )
+        ],
+      ),
+    ));
+  }
+}
+
+class OnboardingViewHorizontal2 extends StatelessWidget {
+  const OnboardingViewHorizontal2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Column(
+              children: [
+                const Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: Fbluecolor),
+                  height: 352.h,
+                  width: 100.w,
+                ),
+                SizedBox(height: 67.h),
+                Text(
+                  "Free delivery offers",
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w900,
+                      color: Fblackcolor),
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  "Get all your loved foods in one once place,\nyou just place the orer we do the rest",
+                  style: TextStyle(
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.w900,
+                      color: Fblackcolor001),
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  child: AbuttonWidget(
+                      text: "NEXT",
+                      callback: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) =>
+                                const OnboardingViewHorizontal2()));
+                      }),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                AtextBwidget(
+                    text: "SKIP",
+                    ontap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              const OnboardingViewHorizontal2()));
+                    },
+                    color: Fblackcolor001),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

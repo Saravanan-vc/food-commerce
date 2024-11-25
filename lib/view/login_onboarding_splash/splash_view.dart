@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:commerce/ui/images_ui.dart';
 // import 'package:commerce/view/amazon_view.dart';
 import 'package:commerce/view/home_view.dart';
-// import 'package:commerce/view/login_onboarding_splash/onboarding_view.dart';
+import 'package:commerce/view/login_onboarding_splash/onboarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,9 +50,8 @@ class _SplashView1State extends State<SplashView1> {
   void initState() {
     Timer(const Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-           builder: (context) => const //OnboardingView()
-              HomeView()
-              ));
+          builder: (context) => const //OnboardingView()
+              HomeView()));
     });
     super.initState();
   }
@@ -78,6 +77,57 @@ class _SplashView1State extends State<SplashView1> {
               splashImage1,
               height: 292.h,
               width: 295.w,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+class SplasviewHorizontal extends StatefulWidget {
+  const SplasviewHorizontal({super.key});
+
+  @override
+  State<SplasviewHorizontal> createState() => _SplasviewHorizontalState();
+}
+
+class _SplasviewHorizontalState extends State<SplasviewHorizontal> {
+  @override
+  void initState() {
+    Timer(const Duration(seconds: 4), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const OnboardingViewHorizontal(),
+          //HomeView(),
+        ),
+      );
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          SizedBox(
+            height: ScreenUtil().screenHeight,
+          ),
+          Center(
+            child: Image.asset(
+              splashImage,
+              width: 121.w,
+            ),
+          ),
+          Positioned(
+            bottom: -MediaQuery.sizeOf(context).height * 0.28,
+            right: -MediaQuery.sizeOf(context).width * 0.67,
+            child: Image.asset(
+              splashImage1,
+              height: 592.h,
+              width: 595.w,
             ),
           ),
         ],

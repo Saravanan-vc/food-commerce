@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:commerce/ui/extension/overall_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,7 +16,7 @@ class AbuttonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: callback,
       child: Container(
-        height: 62.h,
+        height: context.fullWidth < 450 ? 62.h : 110.h,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r), color: Forangcolor),
@@ -23,7 +24,7 @@ class AbuttonWidget extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: context.fullWidth < 450 ? 14.sp : 11.sp,
                 fontWeight: FontWeight.bold,
                 color: Fwhitcolor),
           ),
@@ -54,7 +55,9 @@ class AtextBwidget extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            fontSize: 16.sp, fontWeight: FontWeight.bold, color: color),
+            fontSize: context.fullWidth < 450 ? 16.sp : 10.sp,
+            fontWeight: FontWeight.bold,
+            color: color),
       ),
     );
   }

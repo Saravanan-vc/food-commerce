@@ -18,9 +18,27 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(scaffoldBackgroundColor: Fwhitcolor),
-          home: const SplashView(),
+          home: const LayoutbuilderWidget(
+            mobile: SplashView(),
+          ),
         );
       },
     );
+  }
+}
+
+class LayoutbuilderWidget extends StatelessWidget {
+  final Widget mobile;
+  const LayoutbuilderWidget({super.key, required this.mobile});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constrainedBox) {
+      if (constrainedBox.maxWidth < 450) {
+        return mobile;
+      } else {
+        return const SplasviewHorizontal();
+      }
+    });
   }
 }
