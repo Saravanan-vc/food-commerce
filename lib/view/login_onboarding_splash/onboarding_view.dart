@@ -314,21 +314,20 @@ class OnboardingViewHorizontal2 extends StatelessWidget {
                       text: "NEXT",
                       callback: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) =>
-                                const OnboardingViewHorizontal2()));
+                            builder: (context) => const LoginView()));
                       }),
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                AtextBwidget(
-                    text: "SKIP",
-                    ontap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) =>
-                              const OnboardingViewHorizontal2()));
-                    },
-                    color: Fblackcolor001),
+                // AtextBwidget(
+                //     text: "SKIP",
+                //     ontap: () {
+                //       Navigator.of(context).pushReplacement(MaterialPageRoute(
+                //           builder: (context) =>
+                //               const OnboardingViewHorizontal2()));
+                //     },
+                //     color: Fblackcolor001),
               ],
             ),
           )
