@@ -64,25 +64,43 @@ class SiginView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 13.sp, fontWeight: FontWeight.normal),
                       ),
-                      const InputfieldWidgets(hinttext: "JONE DOE"),
+                      InputfieldWidgets(
+                        hinttext: "JONE DOE",
+                        controller: TextEditingController(),
+                        validator: (String? h) { return null;},
+                      ),
                       Text(
                         "EMAIL",
                         style: TextStyle(
                             fontSize: 13.sp, fontWeight: FontWeight.normal),
                       ),
-                      const InputfieldWidgets(hinttext: "example@gmail.com"),
+                      InputfieldWidgets(
+                        hinttext: "example@gmail.com",
+                        controller: TextEditingController(),
+                        validator: (String? o) { return null;},
+                      ),
                       Text(
                         "PASSWORD",
                         style: TextStyle(
                             fontSize: 13.sp, fontWeight: FontWeight.normal),
                       ),
-                      const InputfieldWidgets(hinttext: "* * * * * * * *"),
+                      InputfieldWidgets(
+                        hinttext: "* * * * * * * *",
+                        controller: TextEditingController(),
+                        validator: (String? l) { return null;},
+                      ),
                       Text(
                         "RE-TYPE PASSWORD",
                         style: TextStyle(
                             fontSize: 13.sp, fontWeight: FontWeight.normal),
                       ),
-                      const InputfieldWidgets(hinttext: "* * * * * * * *"),
+                      InputfieldWidgets(
+                        hinttext: "* * * * * * * *",
+                        controller: TextEditingController(),
+                        validator: (String? k) {
+                          return null;
+                        },
+                      ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 38.h),
                         child: AbuttonWidget(

@@ -19,6 +19,7 @@ dependencies:
   flutter_timezone: ^3.0.1
   flutter_hooks: ^0.20.5
   smooth_page_indicator: ^1.2.0+3
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
