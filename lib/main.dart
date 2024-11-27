@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/controller/authentication_controller.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/view/login_onboarding_splash/splash_view.dart';
+import 'package:food/widgets/timerdecrese_widgets.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,7 +21,11 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(
-                create: (_) => AuthenticationControllerLoginScreen())
+                create: (_) => AuthenticationControllerLoginScreen()),
+            ChangeNotifierProvider(
+                create: (_) => AuthenticationControllerForgetnScreen()),
+                ChangeNotifierProvider(
+                create: (_) => TimerdecreseWidgets())
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

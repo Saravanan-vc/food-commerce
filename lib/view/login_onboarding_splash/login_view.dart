@@ -132,6 +132,7 @@ class LoginView extends StatelessWidget {
                                               const ForgotView(),
                                         ),
                                       );
+                                      controllerALS.dispose();
                                     },
                                     color: Forangcolor,
                                   )
