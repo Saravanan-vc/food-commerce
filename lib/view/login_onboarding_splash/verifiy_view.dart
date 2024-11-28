@@ -18,6 +18,7 @@ class VerifiyView extends StatelessWidget {
         controllerVV.timer();
       });
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(
@@ -85,19 +86,25 @@ class VerifiyView extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 8.h),
-                          child:const Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               SingelboxWidgets(
                                 backwards: false,
                                 frontgo: true,
-                                  ),
-                              SingelboxWidgets(frontgo: true, backwards: true,
-                                  ),
-                              SingelboxWidgets(frontgo: true, backwards: true,
-                                  ),
-                              SingelboxWidgets(frontgo: false, backwards: true,
-                                  ),
+                              ),
+                              SingelboxWidgets(
+                                frontgo: true,
+                                backwards: true,
+                              ),
+                              SingelboxWidgets(
+                                frontgo: true,
+                                backwards: true,
+                              ),
+                              SingelboxWidgets(
+                                frontgo: false,
+                                backwards: true,
+                              ),
                             ],
                           ),
                         ),

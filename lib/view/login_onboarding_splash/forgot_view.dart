@@ -14,8 +14,8 @@ class ForgotView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationControllerForgetnScreen>(
       builder: (context, conterolerF, child) {
-       
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               Container(

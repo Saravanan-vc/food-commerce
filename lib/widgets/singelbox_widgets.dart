@@ -31,9 +31,11 @@ class SingelboxWidgets extends StatelessWidget {
                   color: Fblackcolor002),
               fillColor: Fblackcolor001),
           onChanged: (input) {
+            // ignore: prefer_is_empty
             if (input.length > 0 && frontgo) {
               FocusManager.instance.primaryFocus!.nextFocus();
             }
+            // ignore: prefer_is_empty
             if (input.length == 0 && backwards) {
               FocusManager.instance.primaryFocus!.previousFocus();
             }

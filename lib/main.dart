@@ -24,8 +24,9 @@ class MyApp extends StatelessWidget {
                 create: (_) => AuthenticationControllerLoginScreen()),
             ChangeNotifierProvider(
                 create: (_) => AuthenticationControllerForgetnScreen()),
-                ChangeNotifierProvider(
-                create: (_) => TimerdecreseWidgets())
+            ChangeNotifierProvider(create: (_) => TimerdecreseWidgets()),
+            ChangeNotifierProvider(
+                create: (_) => AuthenticationControllerSignScreen())
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

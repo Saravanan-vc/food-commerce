@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/view/home_view.dart';
+import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
 import 'package:food/view/login_onboarding_splash/verifiy_view.dart';
 import 'package:food/widgets/innerappmsg_widgets.dart';
 import 'package:provider/provider.dart';
@@ -79,6 +80,60 @@ class AuthenticationControllerForgetnScreen extends ChangeNotifier
   void checkthlogin(String text, BuildContext context) {
     if (RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(text)) {
       context.gothrough(const VerifiyView());
+    }
+  }
+}
+
+class AuthenticationControllerSignScreen extends ChangeNotifier
+    implements AuthenticationBluePrinte {
+  @override
+  TextEditingController emailtextediting = TextEditingController();
+
+  @override
+  bool obscuretext = true;
+
+  @override
+  TextEditingController passwordtextediting = TextEditingController();
+
+  TextEditingController nametextediting = TextEditingController();
+
+  TextEditingController retypetextediting = TextEditingController();
+
+  @override
+  void disposecontroller() {
+    emailtextediting.dispose();
+    passwordtextediting.dispose();
+    nametextediting.dispose();
+    retypetextediting.dispose();
+  }
+
+  //rember checkout
+  bool _checkout = false;
+  bool get checkout => _checkout;
+
+  //change rember checkout
+  void changecheckout() {
+    _checkout = !_checkout;
+    notifyListeners();
+  }
+
+  bool _checkout1 = false;
+  bool get checkout1 => _checkout1;
+
+  //change rember checkout
+  void changecheckout1() {
+    _checkout1 = !_checkout1;
+    notifyListeners();
+  }
+
+  void gohomescreen(
+      String email, String password, String name, BuildContext context) {
+    if (email.isNotEmpty &&
+        RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(email) &&
+        password.isNotEmpty &&
+        password.length > 6 &&
+        name.isNotEmpty) {
+      context.gothrough(const LocationaccessView());
     }
   }
 }

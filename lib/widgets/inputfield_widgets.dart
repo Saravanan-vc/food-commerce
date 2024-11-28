@@ -11,7 +11,7 @@ class InputfieldWidgets extends StatelessWidget {
     super.key,
     required this.hinttext,
     required this.controller,
-    required this.validator,
+     this.validator,
   });
 
   @override
