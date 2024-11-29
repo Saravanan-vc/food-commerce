@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
     if (mounted) {
       Future.delayed(const Duration(seconds: 2), () {
         // tutroial.getdata(context);
-       ShowDailogWidget.offerdilog(context);
+        ShowDailogWidget.offerdilog(context);
       });
     }
   }
@@ -190,6 +190,7 @@ class _HomeViewState extends State<HomeView> {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: ListView.builder(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: 4,
                   itemBuilder: (context, index) {
                     return const RestaurantsCard();
