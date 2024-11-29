@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food/constains/permissionhandler_constains.dart';
 import 'package:food/ui/colors_ui.dart';
-import 'package:food/view/home_view.dart';
+// import 'package:food/view/home_view.dart';
 import 'package:food/widgets/button_widgets.dart';
 
 class LocationaccessView extends StatelessWidget {
@@ -27,11 +28,7 @@ class LocationaccessView extends StatelessWidget {
             SizedBox(height: 93.h),
             AiconButton(
                 callback: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const HomeView(),
-                    ),
-                  );
+                 PermissionhandlerConstains().locationPermission(context);
                 },
                 text: "ACCESS LOCATION",
                 icon: Icons.location_pin),
