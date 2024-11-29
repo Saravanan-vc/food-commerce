@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 
 class SingelboxWidgets extends StatelessWidget {
-  const SingelboxWidgets({super.key});
+  final bool frontgo;
+  final bool backwards;
+  const SingelboxWidgets(
+      {super.key, required this.frontgo, required this.backwards});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,6 +17,7 @@ class SingelboxWidgets extends StatelessWidget {
           color: FlighBcolor, borderRadius: BorderRadius.circular(10.r)),
       child: Center(
         child: TextFormField(
+          focusNode: FocusNode(),
           textAlign: TextAlign.center,
           decoration: InputDecoration(
               border: InputBorder.none,
@@ -26,6 +30,16 @@ class SingelboxWidgets extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Fblackcolor002),
               fillColor: Fblackcolor001),
+          onChanged: (input) {
+            // ignore: prefer_is_empty
+            if (input.length > 0 && frontgo) {
+              FocusManager.instance.primaryFocus!.nextFocus();
+            }
+            // ignore: prefer_is_empty
+            if (input.length == 0 && backwards) {
+              FocusManager.instance.primaryFocus!.previousFocus();
+            }
+          },
         ),
       ),
     );

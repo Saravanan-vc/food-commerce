@@ -17,8 +17,8 @@ class RestaurantsCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(top: 4.h, bottom: 8.h),
         child: SizedBox(
-          height: context.fullHeight < 650 ? 0.28.sh : 0.25.sh,
-          width: double.infinity,
+          height: context.fullHeight < 650 ? 0.28.sh : 0.28.sh,
+          // width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -82,6 +82,7 @@ class RestaurantsCard extends StatelessWidget {
                   )
                 ],
               ),
+              const Spacer(flex: 4),
             ],
           ),
         ),

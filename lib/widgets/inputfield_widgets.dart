@@ -11,7 +11,7 @@ class InputfieldWidgets extends StatelessWidget {
     super.key,
     required this.hinttext,
     required this.controller,
-    required this.validator,
+    this.validator,
   });
 
   @override
@@ -25,8 +25,9 @@ class InputfieldWidgets extends StatelessWidget {
         validator: validator,
         controller: controller,
         decoration: InputDecoration(
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 19.w, vertical: 24.h),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 19.w,
+            ),
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -68,8 +69,7 @@ class InputfieldWidgetsT extends StatelessWidget {
           controller: controller,
           validator: validator,
           decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 19.w, vertical: 30.h),
+              contentPadding: EdgeInsets.symmetric(horizontal: 19.w),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide.none),

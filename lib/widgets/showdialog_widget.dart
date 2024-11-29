@@ -6,6 +6,7 @@ import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/images_ui.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ShowDailogWidget {
   static offerdilog(context) {
@@ -401,6 +402,36 @@ class ShowDailogWidget {
                 ),
               ),
             ),
+          );
+        });
+  }
+
+  //location if denyed
+  static locationdilog(context) async {
+    return showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: const Text("Location Permission Needed"),
+            content: const Text(
+              "To proceed, please grant location access. You can enable it in your device settings.",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  // Open app settings
+                  openAppSettings();
+                },
+                child: const Text("Go to Settings"),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
           );
         });
   }
