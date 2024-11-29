@@ -5,6 +5,7 @@ import 'package:food/constains/food_constains.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
+import 'package:food/view/cart_view.dart';
 import 'package:food/view/search_view.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/restaurants_card.dart';
@@ -82,17 +83,23 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                   const Spacer(),
-                  Container(
-                    key: tutroial.lobalKey,
-                    decoration: const BoxDecoration(
-                        color: Fblackcolor, shape: BoxShape.circle),
-                    height: 45.h,
-                    width: 45.w,
-                    child: Center(
-                      child: Icon(
-                        CupertinoIcons.bag,
-                        size: 20.sp,
-                        color: Fwhitcolor,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const CartView()));
+                    },
+                    child: Container(
+                      key: tutroial.lobalKey,
+                      decoration: const BoxDecoration(
+                          color: Fblackcolor, shape: BoxShape.circle),
+                      height: 45.h,
+                      width: 45.w,
+                      child: Center(
+                        child: Icon(
+                          CupertinoIcons.bag,
+                          size: 20.sp,
+                          color: Fwhitcolor,
+                        ),
                       ),
                     ),
                   ),

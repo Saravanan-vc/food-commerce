@@ -21,20 +21,22 @@ class InputfieldWidgets extends StatelessWidget {
       margin: EdgeInsets.only(top: 8.h, bottom: 24.h),
       decoration: BoxDecoration(
           color: FlighBcolor, borderRadius: BorderRadius.circular(10.r)),
-      child: TextFormField(
-        validator: validator,
-        controller: controller,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 19.w,
-            ),
-            border: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            hintText: hinttext,
-            hintStyle: TextStyle(fontSize: 18.sp),
-            fillColor: Fblackcolor001),
+      child: Center(
+        child: TextFormField(
+          validator: validator,
+          controller: controller,
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 19.w,
+              ),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              hintText: hinttext,
+              hintStyle: TextStyle(fontSize: 18.sp),
+              fillColor: Fblackcolor001),
+        ),
       ),
     );
   }

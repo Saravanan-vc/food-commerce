@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 
-
 // container Button
 class AbuttonWidget extends StatelessWidget {
   final String text;
@@ -82,6 +81,43 @@ class Aunderbutton extends StatelessWidget {
           child: Text(
             "RESEND",
             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// UnderLine Button
+class Aunderbutton1 extends StatelessWidget {
+  final VoidCallback ontap;
+  final String text;
+  final Color textcolor;
+  const Aunderbutton1(
+      {super.key,
+      required this.ontap,
+      required this.text,
+      required this.textcolor});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        ontap();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: textcolor),
+          ),
+        ),
+        
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 2.h),
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: 14.sp, fontWeight: FontWeight.w600, color: textcolor),
           ),
         ),
       ),

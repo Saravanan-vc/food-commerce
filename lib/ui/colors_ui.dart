@@ -17,3 +17,5 @@ const Color Fgreencolor = Color.fromARGB(163, 58, 187, 63);
 const Color Ftranscolor = Colors.transparent;
 const Color Fyellcolor = Colors.yellow;
 const Color Fblackcolor01 = Colors.black12;
+const Color Fwhitecolor012 = Colors.white12;
+const Color Fredcolor = Colors.red;
