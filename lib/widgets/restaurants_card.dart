@@ -82,6 +82,7 @@ class RestaurantsCard extends StatelessWidget {
                   )
                 ],
               ),
+              const Spacer(flex: 4),
             ],
           ),
         ),

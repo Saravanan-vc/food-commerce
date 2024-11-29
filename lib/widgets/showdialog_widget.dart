@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/images_ui.dart';
-import 'package:food/view/home_view.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
