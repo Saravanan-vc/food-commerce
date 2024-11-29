@@ -141,9 +141,7 @@ class LoginView extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 0),
-                                child: AbuttonWidget(
+                              AbuttonWidget(
                                     text: "LOGIN IN",
                                     callback: () {
                                       !_key.currentState!.validate()
@@ -155,7 +153,6 @@ class LoginView extends StatelessWidget {
                                                   .passwordtextediting.text,
                                               context);
                                     }),
-                              ),
                               const Spacer(),
                               Center(
                                 child: Wrap(

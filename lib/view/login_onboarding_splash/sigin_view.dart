@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/controller/authentication_controller.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/images_ui.dart';
-import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/inputfield_widgets.dart';
 import 'package:provider/provider.dart';
