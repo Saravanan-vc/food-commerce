@@ -111,7 +111,6 @@ class Aunderbutton1 extends StatelessWidget {
             bottom: BorderSide(color: textcolor),
           ),
         ),
-        
         child: Padding(
           padding: EdgeInsets.only(bottom: 2.h),
           child: Text(
@@ -201,6 +200,44 @@ class AouterButton extends StatelessWidget {
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 color: Fwhitcolor),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//outer line color2
+class AouterButton1 extends StatelessWidget {
+  final String text;
+  final Color bodercolor;
+  final Color innercolor;
+  final VoidCallback callback;
+  final Color textcolor;
+  const AouterButton1(
+      {super.key,
+      required this.text,
+      required this.callback,
+      required this.bodercolor,
+      required this.innercolor,
+      required this.textcolor});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: callback,
+      child: Container(
+        height: 62.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: innercolor,
+            border: Border.all(width: 2, color: bodercolor)),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: 14.sp, fontWeight: FontWeight.bold, color: textcolor),
           ),
         ),
       ),

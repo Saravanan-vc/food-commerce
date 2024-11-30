@@ -19,3 +19,12 @@ const List<String> listofincridient1 = [
   "assets/images/brocoli.png",
   "assets/images/ginger.png"
 ];
+// payment images
+const cashImage = "assets/images/cash.png";
+const visaImage = "assets/images/visa_log.png";
+const masterImage = "assets/images/master_log.png";
+const paypalImage = "assets/images/Paypal.png";
+
+// Payment cards
+const masterCardImage = "assets/images/master_card.png";
+const visaCardImage = "assets/images/visa_card.png";
