@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
+import 'package:food/ui/images_ui.dart';
+import 'package:food/view/detail_screen/calldriver_detail.dart';
+import 'package:food/view/detail_screen/chatdelivery_detail.dart';
 import 'package:food/widgets/trackingscreen_order_widgets.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 
 class TrackingordetDetail extends StatelessWidget {
   const TrackingordetDetail({super.key});
@@ -12,47 +16,53 @@ class TrackingordetDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlighText,
-      body: Column(
+      body: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 50.h, left: 24.w, right: 24.w),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    context.gouthrough();
-                  },
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: Fblackcolor, shape: BoxShape.circle),
-                    height: 45.h,
-                    width: 45.w,
-                    child: const Center(
-                      child: Icon(
-                        CupertinoIcons.back,
-                        color: FlighBcolor,
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 50.h, left: 24.w, right: 24.w),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        context.gouthrough();
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Fblackcolor, shape: BoxShape.circle),
+                        height: 45.h,
+                        width: 45.w,
+                        child: const Center(
+                          child: Icon(
+                            CupertinoIcons.back,
+                            color: FlighBcolor,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 18.w),
+                      child: Text(
+                        "Track Order",
+                        style: TextStyle(
+                            color: Fblackcolor,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 18.w),
-                  child: Text(
-                    "PAYMENT",
-                    style: TextStyle(
-                        color: Fblackcolor,
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              SizedBox(height: 40.h),
+              Center(child: Image.asset(demolocationImage)),
+            ],
           ),
           Expanded(
             child: DraggableScrollableSheet(
               initialChildSize: 0.23,
               minChildSize: .23,
-              maxChildSize: .9,
+              maxChildSize: .84,
               builder: (context, scroll) {
                 return Container(
                   decoration: BoxDecoration(
@@ -92,11 +102,136 @@ class TrackingordetDetail extends StatelessWidget {
                               .extrabold(),
                         ),
                       ),
-                      SizedBox(
-                        height: 350.h,
-                        child: const Column(
-                          children: [],
-                        ),
+                      SizedBox(height: 30.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 35.w),
+                        child: SizedBox(
+                            height: 340.h,
+                            child: Column(
+                              children: [
+                                ConstrainedBox(
+                                    constraints:
+                                        const BoxConstraints(maxHeight: 75),
+                                    child: TimelineTile(
+                                      beforeLineStyle: const LineStyle(
+                                        color: Forangcolor,
+                                        thickness: 4,
+                                      ),
+                                      endChild: Center(
+                                        child: SizedBox(
+                                          height: 80.h,
+                                          child: const Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '   Your order has been received',
+                                                  style: TextStyle(
+                                                      color: Forangcolor),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      isFirst: true,
+                                      indicatorStyle: IndicatorStyle(
+                                        width: 30.sp,
+                                        color: Forangcolor,
+                                        iconStyle: IconStyle(
+                                          color: Colors.white,
+                                          iconData: Icons.check,
+                                        ),
+                                      ),
+                                    )),
+                                ConstrainedBox(
+                                    constraints:
+                                        const BoxConstraints(maxHeight: 75),
+                                    child: TimelineTile(
+                                      beforeLineStyle: const LineStyle(
+                                        color: Forangcolor,
+                                        thickness: 4,
+                                      ),
+                                      endChild: SizedBox(
+                                        height: 80.h,
+                                        child: const Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '   The restaurant is preparing your food',
+                                                style: TextStyle(
+                                                    color: Forangcolor),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      indicatorStyle: IndicatorStyle(
+                                        width: 30.sp,
+                                        color: Forangcolor,
+                                        iconStyle: IconStyle(
+                                          color: Colors.white,
+                                          iconData: Icons
+                                              .wifi_protected_setup_rounded,
+                                        ),
+                                      ),
+                                    )),
+                                ConstrainedBox(
+                                    constraints:
+                                        const BoxConstraints(maxHeight: 75),
+                                    child: TimelineTile(
+                                      endChild: SizedBox(
+                                        height: 80.h,
+                                        child: const Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  '   Your order has been picked up for delivery'),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      indicatorStyle: IndicatorStyle(
+                                        width: 30.sp,
+                                        iconStyle: IconStyle(
+                                          color: Colors.white,
+                                          iconData: Icons.check,
+                                        ),
+                                      ),
+                                    )),
+                                ConstrainedBox(
+                                  constraints:
+                                      const BoxConstraints(maxHeight: 75),
+                                  child: TimelineTile(
+                                    endChild: SizedBox(
+                                      height: 80.h,
+                                      child: const Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text('   Order arriving soon!'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    isLast: true,
+                                    indicatorStyle: IndicatorStyle(
+                                      width: 30.sp,
+                                      iconStyle: IconStyle(
+                                        color: Colors.white,
+                                        iconData: Icons.check,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
                       ),
                       const Expanded(
                         child: Divider(
@@ -119,43 +254,62 @@ class TrackingordetDetail extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Robert F.".toUpperCase(),
+                                  "Robert F.",
+                                  style: const TextStyle()
+                                      .fontsize(22)
+                                      .extrabold(),
                                 ),
-                                const Text("courier"),
+                                Text(
+                                  "courier",
+                                  style: const TextStyle(color: Fblackcolor002)
+                                      .fontsize(16)
+                                      .extrabold(),
+                                ),
                               ],
                             ),
                             const Spacer(),
-                            Container(
-                              height: 50.h,
-                              width: 50.w,
-                              decoration: const BoxDecoration(
-                                  color: Forangcolor,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Forangcolor,
-                                        spreadRadius: 4,
-                                        blurRadius: 4)
-                                  ]),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.call_outlined,
-                                  color: Fwhitcolor,
+                            GestureDetector(
+                              onTap: () {
+                                context.gothrough(const CalldriverDetail());
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(right: 5.w),
+                                height: 50.h,
+                                width: 50.w,
+                                decoration: const BoxDecoration(
+                                    color: Forangcolor,
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Forangcolor,
+                                          spreadRadius: 4,
+                                          blurRadius: 4)
+                                    ]),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.call_outlined,
+                                    color: Fwhitcolor,
+                                  ),
                                 ),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(left: 6.w),
-                              height: 50.h,
-                              width: 50.w,
-                              decoration: BoxDecoration(
-                                  color: Fwhitcolor,
-                                  shape: BoxShape.circle,
-                                  border:
-                                      Border.all(width: 2, color: Forangcolor)),
-                              child: const Icon(
-                                CupertinoIcons.chat_bubble_text,
-                                color: Forangcolor,
+                            GestureDetector(
+                              onTap: () {
+                                context.gothrough(const ChatdeliveryDetail());
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 6.w),
+                                height: 50.h,
+                                width: 50.w,
+                                decoration: BoxDecoration(
+                                    color: Fwhitcolor,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 2, color: Forangcolor)),
+                                child: const Icon(
+                                  CupertinoIcons.chat_bubble_text,
+                                  color: Forangcolor,
+                                ),
                               ),
                             )
                           ],

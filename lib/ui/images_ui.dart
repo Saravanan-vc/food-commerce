@@ -28,3 +28,4 @@ const paypalImage = "assets/images/Paypal.png";
 // Payment cards
 const masterCardImage = "assets/images/master_card.png";
 const visaCardImage = "assets/images/visa_card.png";
+const demolocationImage = "assets/images/demoLocation.png";
