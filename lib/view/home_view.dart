@@ -5,7 +5,7 @@ import 'package:food/constains/food_constains.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
-import 'package:food/view/cart_view.dart';
+import 'package:food/view/cart_editing_view.dart';
 import 'package:food/view/search_view.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/restaurants_card.dart';
@@ -86,7 +86,7 @@ class _HomeViewState extends State<HomeView> {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const CartView()));
+                          builder: (context) => const CartEditingView()));
                     },
                     child: Container(
                       key: tutroial.lobalKey,

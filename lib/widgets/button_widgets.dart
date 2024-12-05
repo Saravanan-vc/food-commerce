@@ -116,7 +116,7 @@ class Aunderbutton1 extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontSize: 14.sp, fontWeight: FontWeight.w600, color: textcolor),
+                fontSize: 16.sp, fontWeight: FontWeight.w600, color: textcolor),
           ),
         ),
       ),

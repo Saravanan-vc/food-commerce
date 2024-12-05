@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class TimerdecreseWidgets extends ChangeNotifier {
-  int time = 60;
+class TimerdecreseWidgets extends GetxController {
+  RxInt time = 60.obs;
   timer() {
-    if (time > 0) {
-      time--;
-      notifyListeners();
+    if (time.value > 0) {
+      time.value--;
     }
   }
 
