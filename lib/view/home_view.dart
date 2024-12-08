@@ -6,6 +6,7 @@ import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
 import 'package:food/view/cart_editing_view.dart';
+import 'package:food/view/perfoilmenu_screen.dart';
 import 'package:food/view/search_view.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/restaurants_card.dart';
@@ -40,8 +41,7 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // context.gothrough(const PerfoilmenuScreen());
-                      showmessageApi.fetchingchip();
+                      context.gothrough(const PerfoilmenuScreen());
                     },
                     child: Container(
                       key: tutroial.globalKey, //golbakey

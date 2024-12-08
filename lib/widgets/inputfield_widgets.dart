@@ -161,3 +161,66 @@ class InputfieldWidgetsM extends StatelessWidget {
     );
   }
 }
+
+class InputfieldWidgetsBIO extends StatelessWidget {
+  final String hinttext;
+  final TextEditingController controller;
+  final bool obscuretext;
+  final Function ontap;
+  final bool suffixicon;
+  final String? Function(String?)? validator;
+  const InputfieldWidgetsBIO({
+    super.key,
+    required this.hinttext,
+    required this.controller,
+    required this.obscuretext,
+    required this.ontap,
+    required this.suffixicon,
+    this.validator,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 8.h, bottom: 24.h),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: 300.h),
+        child: TextFormField(
+          cursorColor: Forangcolor,
+          obscureText: obscuretext,
+          controller: controller,
+          validator: validator,
+          maxLines: 4,
+          decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.only(left: 19.w, right: 19.w, top: 20.h),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide: BorderSide.none),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide: BorderSide.none),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide: BorderSide.none),
+              errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide: BorderSide.none),
+              hintText: hinttext,
+              suffixIcon: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 19.w),
+                  child: suffixicon
+                      ? GestureDetector(
+                          onTap: () {
+                            ontap();
+                          },
+                          child: const Icon(Icons.remove_red_eye))
+                      : null),
+              hintStyle: TextStyle(fontSize: 18.sp),
+              fillColor: FlighBcolor,
+              filled: true),
+        ),
+      ),
+    );
+  }
+}

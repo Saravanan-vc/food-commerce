@@ -5,6 +5,7 @@ import 'package:food/controller/cart_get_controller.dart';
 import 'package:food/model/cartitem_model.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
+import 'package:food/view/detail_screen/addressview_detail.dart';
 import 'package:food/view/payment_view.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/inputfield_widgets.dart';
@@ -118,7 +119,9 @@ class CartEditingView extends StatelessWidget {
                           Aunderbutton1(
                             text: "EDIT",
                             textcolor: Forangcolor,
-                            ontap: () {},
+                            ontap: () {
+                              context.gothrough(const AddressviewDetail());
+                            },
                           )
                         ],
                       ),

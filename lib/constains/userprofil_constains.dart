@@ -9,7 +9,7 @@ List userone = [
     const PersonalinfoDetail(),
     Forangcolor
   ],
-  [Icons.map_outlined, "Addresses", () {}, Fbluecolor]
+  [Icons.map_outlined, "Addresses", const PersonalinfoDetail(), Fbluecolor]
 ];
 
 List usertwo = [
@@ -29,3 +29,11 @@ List userthere = [
 List userfour = [
   [Icons.output_rounded, "Log Out", () {}, Fbluecolor],
 ];
+
+List userinfo = [
+  [Icons.person_2_outlined, "Vishal khadok", Forangcolor],
+  [Icons.mail_outline_outlined, "hello@gmail.com", Fbluecolor],
+  [Icons.call, "000 000 0000", Fgreencolor]
+];
+
+List<String> title = ["FULL NAME", "EMAIL", "PHONE NUMBER"];

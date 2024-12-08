@@ -1,12 +1,13 @@
 import 'dart:async';
-// import 'package:commerce/view/amazon_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/animatioins/transation_animations.dart';
 import 'package:food/ui/images_ui.dart';
+// import 'package:food/view/detail_screen/addressview_detail.dart';
 import 'package:food/view/home_view.dart';
+// import 'package:food/view/detail_screen/profilediting_detail.dart';
+// import 'package:food/view/home_view.dart';
 import 'package:food/widgets/showdialog_widget.dart';
-// import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -24,6 +25,8 @@ class _SplashViewState extends State<SplashView> {
           builder: (context) => const HomeView(),
           // const OnboardingView3(),
           // const LocationaccessView(),
+          //const PersonalinfoDetail(),
+          // const ProfileditingDetail(),
         ),
       );
 

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class ShowmessageApi extends GetxController {
   final String showimage = "https://saravanan-vc.github.io/shoe_api/firstindex";
   final String fakeapi = "https://fakestoreapi.com/products";
-    RxList foodchip = [].obs;
+  RxList foodchip = [].obs;
 
   Future fetchingchip() async {
     var response = await http
@@ -15,10 +15,7 @@ class ShowmessageApi extends GetxController {
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       foodchip.value = body;
-      debugPrint("${foodchip[0]['category']}");
-    } else {
-      debugPrint("not right");
-    }
+    } else {}
   }
 
   Future fetchpopmesage() async {
