@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food/constains/food_constains.dart';
+import 'package:food/api/showmessage_api.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
@@ -10,7 +10,7 @@ import 'package:food/view/search_view.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/restaurants_card.dart';
 import 'package:food/widgets/search_widgets.dart';
-import 'package:food/widgets/showdialog_widget.dart';
+import 'package:get/get.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,15 +21,11 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Tutroial tutroial = Tutroial();
+  ShowmessageApi showmessageApi = Get.find<ShowmessageApi>(tag: "chip");
   @override
   void initState() {
+    showmessageApi.fetchingchip();
     super.initState();
-    if (mounted) {
-      Future.delayed(const Duration(seconds: 2), () {
-        // tutroial.getdata(context);
-        ShowDailogWidget.offerdilog(context);
-      });
-    }
   }
 
   @override
@@ -42,14 +38,20 @@ class _HomeViewState extends State<HomeView> {
               padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 50.h),
               child: Row(
                 children: [
-                  Container(
-                    key: tutroial.globalKey, //golbakey
-                    decoration: const BoxDecoration(
-                        color: FlighBcolor, shape: BoxShape.circle),
-                    height: 45.h,
-                    width: 45.w,
-                    child: const Center(
-                      child: Icon(CupertinoIcons.line_horizontal_3),
+                  GestureDetector(
+                    onTap: () {
+                      // context.gothrough(const PerfoilmenuScreen());
+                      showmessageApi.fetchingchip();
+                    },
+                    child: Container(
+                      key: tutroial.globalKey, //golbakey
+                      decoration: const BoxDecoration(
+                          color: FlighBcolor, shape: BoxShape.circle),
+                      height: 45.h,
+                      width: 45.w,
+                      child: const Center(
+                        child: Icon(CupertinoIcons.line_horizontal_3),
+                      ),
                     ),
                   ),
                   Padding(
@@ -161,12 +163,17 @@ class _HomeViewState extends State<HomeView> {
               padding: EdgeInsets.only(left: 24.w),
               child: SizedBox(
                 height: 70.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: foodList.length,
-                  itemBuilder: (context, index) {
-                    return RectanglechipWidget(
-                      title: foodList[index],
+                child: Obx(
+                  () {
+                    debugPrint("${showmessageApi.foodchip.length}");
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: showmessageApi.foodchip.length - 4,
+                      itemBuilder: (context, index) {
+                        return RectanglechipWidget(
+                          title: showmessageApi.foodchip[index]["category"],
+                        );
+                      },
                     );
                   },
                 ),

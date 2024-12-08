@@ -23,24 +23,25 @@ class RestaurantsCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 137.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.sp),
-                    color: Fbluecolor),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.sp),
+                      color: Fbluecolor),
+                ),
               ),
-              const Spacer(),
+              SizedBox(height: 3.h),
               Text(
                 "Restaruants Name",
                 style: TextStyle(fontSize: 20.sp, color: Fblackcolor),
               ),
-              const Spacer(),
+              SizedBox(height: 5.h),
               Text(
                 "Burger - Chiken - Riche - Wings ",
                 style: TextStyle(fontSize: 20.sp, color: Fblackcolor001),
               ),
-              const Spacer(),
+              SizedBox(height: 5.h),
               Row(
                 children: [
                   Row(
@@ -83,7 +84,7 @@ class RestaurantsCard extends StatelessWidget {
                   )
                 ],
               ),
-              const Spacer(flex: 4),
+              SizedBox(height: 2.h),
             ],
           ),
         ),

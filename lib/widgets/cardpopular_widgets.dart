@@ -85,3 +85,93 @@ class CardpopularWidgets extends StatelessWidget {
     );
   }
 }
+
+class CardpopularWidgetsapi extends StatelessWidget {
+  final String name;
+  final String chategory;
+  final String price;
+  const CardpopularWidgetsapi(
+      {super.key,
+      required this.name,
+      required this.chategory,
+      required this.price});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.gothrough(const ProductsDetail());
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 4.w),
+        height: 222.h,
+        width: 183.w,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25.sp),
+            color: Fwhitcolor,
+            boxShadow: const [
+              BoxShadow(spreadRadius: 0, blurRadius: 6, color: Fblackcolor01)
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 2.h),
+              height: 110.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25.sp),
+                  color: Fbluecolor),
+            ),
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              child: Text(
+                name,
+                style: const TextStyle(
+                        color: Fblackcolor, overflow: TextOverflow.ellipsis)
+                    .fontsize(20)
+                    .extrabold(),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              child: Text(chategory,
+                  style: const TextStyle(color: Fblackcolor002).fontsize(16)),
+            ),
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    r"$" + price,
+                    style: const TextStyle(color: Fblackcolor)
+                        .fontsize(20)
+                        .extrabold(),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: Forangcolor, shape: BoxShape.circle),
+                    height: 35.h,
+                    width: 35.w,
+                    child: Center(
+                      child: Icon(
+                        CupertinoIcons.add,
+                        size: 20.sp,
+                        color: Fwhitcolor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}

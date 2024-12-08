@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/animatioins/transation_animations.dart';
 import 'package:food/ui/images_ui.dart';
 import 'package:food/view/home_view.dart';
+import 'package:food/widgets/showdialog_widget.dart';
 // import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -25,6 +26,11 @@ class _SplashViewState extends State<SplashView> {
           // const LocationaccessView(),
         ),
       );
+
+      Future.delayed(const Duration(milliseconds: 2), () {
+        if (!mounted) return;
+        ShowDailogWidget.firstmessage(context);
+      });
     });
     super.initState();
   }

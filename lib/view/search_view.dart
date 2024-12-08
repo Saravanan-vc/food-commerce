@@ -1,7 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food/api/showmessage_api.dart';
 import 'package:food/constains/food_constains.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
@@ -10,12 +10,14 @@ import 'package:food/widgets/cardpopular_widgets.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/search_widgets.dart';
 import 'package:food/widgets/sugrestarunts_widgets.dart';
+import 'package:get/get.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ShowmessageApi showmessageApi = Get.find<ShowmessageApi>(tag: "chip");
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -135,9 +137,22 @@ class SearchView extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 2,
                   itemBuilder: (context, index) {
-                    return const Row(
+                    return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [CardpopularWidgets(), CardpopularWidgets()],
+                      children: [
+                        CardpopularWidgetsapi(
+                          name: showmessageApi.foodchip[index]['name'],
+                          chategory: showmessageApi.foodchip[index]['category'],
+                          price: '${showmessageApi.foodchip[index]['price']}',
+                        ),
+                        CardpopularWidgetsapi(
+                          name: showmessageApi.foodchip[index + 2]['name'],
+                          chategory: showmessageApi.foodchip[index + 2]
+                              ['category'],
+                          price:
+                              '${showmessageApi.foodchip[index + 2]['price']}',
+                        )
+                      ],
                     );
                   }),
             )
