@@ -145,7 +145,7 @@ class ProfileditingDetail extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 10.h),
                 child: AbuttonWidget(text: "SAVE", callback: () {}),
               ),
             )

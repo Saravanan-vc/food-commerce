@@ -11,6 +11,7 @@ import 'package:food/view/search_view.dart';
 import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/restaurants_card.dart';
 import 'package:food/widgets/search_widgets.dart';
+import 'package:food/widgets/timerdecrese_widgets.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,9 +24,12 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   Tutroial tutroial = Tutroial();
   ShowmessageApi showmessageApi = Get.find<ShowmessageApi>(tag: "chip");
+  TimerdecreseWidgets timerdecreseWidgets =
+      Get.find<TimerdecreseWidgets>(tag: "timer");
   @override
   void initState() {
     showmessageApi.fetchingchip();
+    timerdecreseWidgets.isbool.value = true;
     super.initState();
   }
 
