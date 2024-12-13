@@ -18,6 +18,9 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationControllerLoginScreen>(
       builder: (context, controllerALS, child) {
+        (MediaQuery.viewInsetsOf(context).bottom != 0)
+            ? controllerALS.isKeybord.value = true
+            : controllerALS.isKeybord.value = false;
         return SafeArea(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -66,82 +69,83 @@ class LoginView extends StatelessWidget {
                         width: double.infinity,
                         child: Padding(
                           padding: EdgeInsets.all(24.sp),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "EMAIL",
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                              InputfieldWidgetsT(
-                                ontap: () {},
-                                hinttext: "example@gmail.com",
-                                controller: controllerALS.emailtextediting,
-                                obscuretext: false,
-                                suffixicon: false,
-                              ),
-                              Text(
-                                "PASSWORD",
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                              InputfieldWidgetsT(
-                                hinttext: "* * * * * * * *",
-                                controller: controllerALS.passwordtextediting,
-                                obscuretext: controllerALS.obscuretext,
-                                suffixicon: true,
-                                ontap: controllerALS.changingobscutext,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 29.h),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Wrap(
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.center,
-                                      children: [
-                                        Checkbox(
-                                            splashRadius: 0,
-                                            checkColor: Forangcolor,
-                                            activeColor: Fwhitcolor,
-                                            side: const BorderSide(
-                                                color: Fblackcolor001,
-                                                width: 1.5),
-                                            value: controllerALS.checkout,
-                                            onChanged: (_) {
-                                              controllerALS.changecheckout();
-                                            }),
-                                        Text(
-                                          "Rember me",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Fblackcolor001),
-                                        )
-                                      ],
-                                    ),
-                                    AtextBwidget(
-                                      text: "Forgot Password",
-                                      ontap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ForgotView(),
-                                          ),
-                                        );
-                                        controllerALS.dispose();
-                                      },
-                                      color: Forangcolor,
-                                    )
-                                  ],
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "EMAIL",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.normal),
                                 ),
-                              ),
-                              AbuttonWidget(
+                                InputfieldWidgetsT(
+                                  ontap: () {},
+                                  hinttext: "example@gmail.com",
+                                  controller: controllerALS.emailtextediting,
+                                  obscuretext: false,
+                                  suffixicon: false,
+                                ),
+                                Text(
+                                  "PASSWORD",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                InputfieldWidgetsT(
+                                  hinttext: "* * * * * * * *",
+                                  controller: controllerALS.passwordtextediting,
+                                  obscuretext: controllerALS.obscuretext,
+                                  suffixicon: true,
+                                  ontap: controllerALS.changingobscutext,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 29.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Wrap(
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        children: [
+                                          Checkbox(
+                                              splashRadius: 0,
+                                              checkColor: Forangcolor,
+                                              activeColor: Fwhitcolor,
+                                              side: const BorderSide(
+                                                  color: Fblackcolor001,
+                                                  width: 1.5),
+                                              value: controllerALS.checkout,
+                                              onChanged: (_) {
+                                                controllerALS.changecheckout();
+                                              }),
+                                          Text(
+                                            "Rember me",
+                                            style: TextStyle(
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.normal,
+                                                color: Fblackcolor001),
+                                          )
+                                        ],
+                                      ),
+                                      AtextBwidget(
+                                        text: "Forgot Password",
+                                        ontap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ForgotView(),
+                                            ),
+                                          );
+                                          controllerALS.dispose();
+                                        },
+                                        color: Forangcolor,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                AbuttonWidget(
                                     text: "LOGIN IN",
                                     callback: () {
                                       !_key.currentState!.validate()
@@ -153,81 +157,90 @@ class LoginView extends StatelessWidget {
                                                   .passwordtextediting.text,
                                               context);
                                     }),
-                              const Spacer(),
-                              Center(
-                                child: Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                SizedBox(height: 38.h),
+                                Center(
+                                  child: Wrap(
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Don't have an account?  ",
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: Fblackcolor001),
+                                      ),
+                                      AtextBwidget(
+                                        text: "Sign in",
+                                        ontap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const SiginView(),
+                                            ),
+                                          );
+                                          controllerALS.dispose();
+                                        },
+                                        color: Forangcolor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 25.h),
+                                Center(
+                                  child: Text(
+                                    "Or",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: Fblackcolor001),
+                                  ),
+                                ),
+                                SizedBox(height: 15.h),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      "Don't have an account?  ",
-                                      style: TextStyle(
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: Fblackcolor001),
+                                    Container(
+                                      height: 62.h,
+                                      width: 62.w,
+                                      decoration: const BoxDecoration(
+                                          color: FLblucolor,
+                                          shape: BoxShape.circle),
+                                      child: Center(
+                                        child: Image.asset(faceImage),
+                                      ),
                                     ),
-                                    AtextBwidget(
-                                      text: "Sign in",
-                                      ontap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SiginView(),
-                                          ),
-                                        );
-                                        controllerALS.dispose();
-                                      },
-                                      color: Forangcolor,
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 30.w),
+                                      height: 62.h,
+                                      width: 62.w,
+                                      decoration: const BoxDecoration(
+                                          color: FlighBlucolor,
+                                          shape: BoxShape.circle),
+                                      child: Center(
+                                        child: Image.asset(twitterImage),
+                                      ),
                                     ),
+                                    Container(
+                                      height: 62.h,
+                                      width: 62.w,
+                                      decoration: const BoxDecoration(
+                                          color: Fblackcolor,
+                                          shape: BoxShape.circle),
+                                      child: Image.asset(appleImage),
+                                    )
                                   ],
                                 ),
-                              ),
-                              const Spacer(),
-                              Center(
-                                child: Text(
-                                  "Or",
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.normal,
-                                      color: Fblackcolor001),
-                                ),
-                              ),
-                              const Spacer(),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 62.h,
-                                    width: 62.w,
-                                    decoration: const BoxDecoration(
-                                        color: FLblucolor,
-                                        shape: BoxShape.circle),
-                                    child: Center(
-                                      child: Image.asset(faceImage),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 30.w),
-                                    height: 62.h,
-                                    width: 62.w,
-                                    decoration: const BoxDecoration(
-                                        color: FlighBlucolor,
-                                        shape: BoxShape.circle),
-                                    child: Center(
-                                      child: Image.asset(twitterImage),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 62.h,
-                                    width: 62.w,
-                                    decoration: const BoxDecoration(
-                                        color: Fblackcolor,
-                                        shape: BoxShape.circle),
-                                    child: Image.asset(appleImage),
-                                  )
-                                ],
-                              )
-                            ],
+                                controllerALS.isKeybord.value
+                                    ? SizedBox(
+                                        height:
+                                            MediaQuery.sizeOf(context).height /
+                                                3,
+                                      )
+                                    : const Material(),
+                              ],
+                            ),
                           ),
                         ),
                       ),

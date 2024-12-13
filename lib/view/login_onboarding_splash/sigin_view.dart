@@ -14,6 +14,9 @@ class SiginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationControllerSignScreen>(
       builder: (context, controllerSV, child) {
+        (MediaQuery.viewInsetsOf(context).bottom != 0)
+            ? controllerSV.isKeybord.value = true
+            : controllerSV.isKeybord.value = false;
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Stack(
@@ -59,67 +62,78 @@ class SiginView extends StatelessWidget {
                     width: double.infinity,
                     child: Padding(
                       padding: EdgeInsets.all(24.sp),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "NAME",
-                            style: TextStyle(
-                                fontSize: 13.sp, fontWeight: FontWeight.normal),
-                          ),
-                          InputfieldWidgets(
-                            hinttext: "JONE DOE",
-                            controller: controllerSV.nametextediting,
-                          ),
-                          Text(
-                            "EMAIL",
-                            style: TextStyle(
-                                fontSize: 13.sp, fontWeight: FontWeight.normal),
-                          ),
-                          InputfieldWidgets(
-                            hinttext: "example@gmail.com",
-                            controller: controllerSV.emailtextediting,
-                          ),
-                          Text(
-                            "PASSWORD",
-                            style: TextStyle(
-                                fontSize: 13.sp, fontWeight: FontWeight.normal),
-                          ),
-                          InputfieldWidgetsT(
-                            hinttext: "* * * * * * * *",
-                            controller: controllerSV.passwordtextediting,
-                            obscuretext: controllerSV.checkout,
-                            ontap: () {
-                              controllerSV.changecheckout();
-                            },
-                            suffixicon: true,
-                          ),
-                          Text(
-                            "RE-TYPE PASSWORD",
-                            style: TextStyle(
-                                fontSize: 13.sp, fontWeight: FontWeight.normal),
-                          ),
-                          InputfieldWidgetsT(
-                            hinttext: "* * * * * * * *",
-                            controller: controllerSV.retypetextediting,
-                            obscuretext: controllerSV.checkout1,
-                            ontap: () {
-                              controllerSV.changecheckout1();
-                            },
-                            suffixicon: true,
-                          ),
-                          AbuttonWidget(
-                            text: "LOGIN IN",
-                            callback: () {
-                              controllerSV.gohomescreen(
-                                  controllerSV.emailtextediting.text,
-                                  controllerSV.passwordtextediting.text,
-                                  controllerSV.nametextediting.text,
-                                  context);
-                            },
-                          ),
-                          const Spacer(),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "NAME",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            InputfieldWidgets(
+                              hinttext: "JONE DOE",
+                              controller: controllerSV.nametextediting,
+                            ),
+                            Text(
+                              "EMAIL",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            InputfieldWidgets(
+                              hinttext: "example@gmail.com",
+                              controller: controllerSV.emailtextediting,
+                            ),
+                            Text(
+                              "PASSWORD",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            InputfieldWidgetsT(
+                              hinttext: "* * * * * * * *",
+                              controller: controllerSV.passwordtextediting,
+                              obscuretext: !controllerSV.checkout,
+                              ontap: () {
+                                controllerSV.changecheckout();
+                              },
+                              suffixicon: true,
+                            ),
+                            Text(
+                              "RE-TYPE PASSWORD",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            InputfieldWidgetsT(
+                              hinttext: "* * * * * * * *",
+                              controller: controllerSV.retypetextediting,
+                              obscuretext: !controllerSV.checkout1,
+                              ontap: () {
+                                controllerSV.changecheckout1();
+                              },
+                              suffixicon: true,
+                            ),
+                            AbuttonWidget(
+                              text: "LOGIN IN",
+                              callback: () {
+                                controllerSV.gohomescreen(
+                                    controllerSV.emailtextediting.text,
+                                    controllerSV.passwordtextediting.text,
+                                    controllerSV.nametextediting.text,
+                                    context);
+                              },
+                            ),
+                            controllerSV.isKeybord.value
+                                ? SizedBox(
+                                    height:
+                                        MediaQuery.sizeOf(context).height / 3,
+                                  )
+                                : const SizedBox(),
+                          ],
+                        ),
                       ),
                     ),
                   ),

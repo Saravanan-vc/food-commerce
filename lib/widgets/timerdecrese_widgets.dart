@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 
 class TimerdecreseWidgets extends GetxController {
   RxBool isbool = false.obs;
@@ -12,4 +11,5 @@ class TimerdecreseWidgets extends GetxController {
   }
 
   FocusNode focusNode = FocusNode();
+  RxInt currentIndex = 0.obs;
 }

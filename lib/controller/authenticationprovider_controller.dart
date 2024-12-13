@@ -4,6 +4,7 @@ import 'package:food/view/home_view.dart';
 import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
 import 'package:food/view/login_onboarding_splash/verifiy_view.dart';
 import 'package:food/widgets/innerappmsg_widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 abstract class AuthenticationBluePrinte {
@@ -68,6 +69,8 @@ class AuthenticationControllerLoginScreen extends ChangeNotifier
     obscuretext = !obscuretext;
     notifyListeners();
   }
+// checking keyboard
+  RxBool isKeybord = false.obs;
 }
 
 class AuthenticationControllerForgetnScreen extends ChangeNotifier
@@ -136,4 +139,7 @@ class AuthenticationControllerSignScreen extends ChangeNotifier
       context.gothrough(const LocationaccessView());
     }
   }
+
+  // checking keyboard
+  RxBool isKeybord = false.obs;
 }

@@ -22,6 +22,8 @@ class AbuttonWidget extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
+                height: 0.8,
+                letterSpacing: 1.1,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 color: Fwhitcolor),

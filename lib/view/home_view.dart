@@ -1,7 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/api/showmessage_api.dart';
+import 'package:food/constains/food_constains.dart';
+import 'package:food/model/sharedperference_mdel.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
@@ -26,8 +29,10 @@ class _HomeViewState extends State<HomeView> {
   ShowmessageApi showmessageApi = Get.find<ShowmessageApi>(tag: "chip");
   TimerdecreseWidgets timerdecreseWidgets =
       Get.find<TimerdecreseWidgets>(tag: "timer");
+  String? valued = "Home";
   @override
   void initState() {
+    SharedperferenceMdel.setinitalpermisiion();
     showmessageApi.fetchingchip();
     timerdecreseWidgets.isbool.value = true;
     super.initState();
@@ -70,21 +75,25 @@ class _HomeViewState extends State<HomeView> {
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold),
                         ),
-                        Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              Text(
-                                "Hala lab Office  ",
-                                style: TextStyle(
-                                    color: Fblackcolor001,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const Icon(
-                                Icons.arrow_drop_down_sharp,
-                                color: Fblackcolor,
-                              )
-                            ])
+                        DropdownButton<String>(
+                          dropdownColor: FlighBcolor,
+                          underline: const SizedBox(),
+                          focusColor: Fwhitcolor,
+                          borderRadius: BorderRadius.circular(20.r),
+                          value: valued,
+                          items: location.map((food) {
+                            return DropdownMenuItem<String>(
+                              enabled: food != valued,
+                              value: food,
+                              child: Text(food),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              valued = value;
+                            });
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -133,7 +142,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16.w, bottom: 31.h),
+              padding: EdgeInsets.only(top: 16.w, bottom: 25.h),
               child: GestureDetector(
                 onTap: () {
                   context.gothrough(const SearchView());
@@ -144,6 +153,62 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Padding(
+              padding: EdgeInsets.only(bottom: 25.h),
+              child: CarouselSlider.builder(
+                itemCount: foodList.length,
+                itemBuilder: (context, index, ind) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        color: Fbluecolor,
+                        borderRadius: BorderRadius.circular(8.r)),
+                  );
+                },
+                options: CarouselOptions(
+                  onPageChanged: (index, r) {
+                    timerdecreseWidgets.currentIndex.value = index;
+                  },
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  scrollDirection: Axis.horizontal,
+                  autoPlayCurve: Curves.ease,
+                  height: 200.h,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.h),
+              child: Obx(() {
+                return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: foodList.map((item) {
+                      debugPrint(
+                          "${timerdecreseWidgets.currentIndex.value}/$item");
+                      return Container(
+                          margin: EdgeInsets.only(left: 10.w),
+                          height: 20.r,
+                          width: foodList.indexOf(item) ==
+                                  timerdecreseWidgets.currentIndex.value
+                              ? 40.r
+                              : 20.r,
+                          decoration: BoxDecoration(
+                              color: Fbluecolor,
+                              borderRadius: BorderRadius.circular(12.r)),
+                          child: foodList.indexOf(item) ==
+                                  timerdecreseWidgets.currentIndex.value
+                              ? Center(
+                                  child: Text(
+                                    "${timerdecreseWidgets.currentIndex.value}/${foodList.indexOf(item)}",
+                                    style: TextStyle(
+                                        color: Fwhitcolor,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 14.sp),
+                                  ),
+                                )
+                              : null);
+                    }).toList());
+              }),
+            ),
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Row(
                 children: [
@@ -152,10 +217,10 @@ class _HomeViewState extends State<HomeView> {
                     style: TextStyle(fontSize: 20.sp),
                   ),
                   const Spacer(),
-                  Text(
-                    "See All",
-                    style: TextStyle(fontSize: 20.sp),
-                  ),
+                  // Text(
+                  //   "See All",
+                  //   style: TextStyle(fontSize: 20.sp),
+                  // ),
                   const Icon(
                     Icons.arrow_right_outlined,
                     color: Fblackcolor,
@@ -172,10 +237,14 @@ class _HomeViewState extends State<HomeView> {
                     debugPrint("${showmessageApi.foodchip.length}");
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: showmessageApi.foodchip.length - 4,
+                      itemCount: showmessageApi.foodchip.isNotEmpty
+                          ? showmessageApi.foodchip.length - 4
+                          : 4,
                       itemBuilder: (context, index) {
                         return RectanglechipWidget(
-                          title: showmessageApi.foodchip[index]["category"],
+                          title: showmessageApi.foodchip.isNotEmpty
+                              ? showmessageApi.foodchip[index]["category"]
+                              : foodList[index],
                         );
                       },
                     );
@@ -184,8 +253,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  left: 24.w, right: 24.w, top: 10.h, bottom: 20.h),
+              padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 10.h),
               child: Row(
                 children: [
                   Text(
@@ -193,10 +261,10 @@ class _HomeViewState extends State<HomeView> {
                     style: TextStyle(fontSize: 20.sp),
                   ),
                   const Spacer(),
-                  Text(
-                    "See All",
-                    style: TextStyle(fontSize: 20.sp),
-                  ),
+                  // Text(
+                  //   "See All",
+                  //   style: TextStyle(fontSize: 20.sp),
+                  // ),
                   const Icon(
                     Icons.arrow_right_outlined,
                     color: Fblackcolor,

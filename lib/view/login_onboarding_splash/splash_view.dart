@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/animatioins/transation_animations.dart';
+import 'package:food/model/sharedperference_mdel.dart';
 import 'package:food/ui/images_ui.dart';
 // import 'package:food/view/detail_screen/addressview_detail.dart';
 import 'package:food/view/home_view.dart';
@@ -24,16 +25,17 @@ class _SplashViewState extends State<SplashView> {
       Get.find<TimerdecreseWidgets>(tag: "timer");
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => //const HomeView(),
-              timerdecreseWidgets.isbool.value
-                  ? const HomeView()
-                  : const OnboardingView3(),
-        ),
-      );
-      if (timerdecreseWidgets.isbool.value) {
+    Timer(const Duration(seconds: 3), () async {
+      bool permission = await SharedperferenceMdel.getinitalpermisiion();
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => //const HomeView(),
+                permission ? const HomeView() : const OnboardingView3(),
+          ),
+        );
+      }
+      if (permission) {
         Future.delayed(const Duration(milliseconds: 2), () {
           if (!mounted) return;
           ShowDailogWidget.firstmessage(context);
