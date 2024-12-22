@@ -13,7 +13,9 @@ class RestaurantsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.gothrough(const RestarunatsDetail());
+        context.gothrough(const RestarunatsDetail(
+          index: 1,
+        ));
       },
       child: Padding(
         padding: EdgeInsets.only(top: 4.h, bottom: 8.h),
@@ -32,57 +34,66 @@ class RestaurantsCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 3.h),
-              Text(
-                "Restaruants Name",
-                style: TextStyle(fontSize: 20.sp, color: Fblackcolor),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  "Restaruants Name",
+                  style: TextStyle(fontSize: 20.sp, color: Fblackcolor),
+                ),
               ),
               SizedBox(height: 5.h),
-              Text(
-                "Burger - Chiken - Riche - Wings ",
-                style: TextStyle(fontSize: 20.sp, color: Fblackcolor001),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  "Burger - Chiken - Riche - Wings ",
+                  style: TextStyle(fontSize: 20.sp, color: Fblackcolor001),
+                ),
               ),
               SizedBox(height: 5.h),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        CupertinoIcons.star,
-                        color: Forangcolor,
-                      ),
-                      Text(
-                        "4.7",
-                        style: TextStyle(fontSize: 14.sp).extrabold(),
-                      )
-                    ],
-                  ),
-                  SizedBox(width: 12.w),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.delivery_dining_outlined,
-                        color: Forangcolor,
-                      ),
-                      Text(
-                        "Free",
-                        style: TextStyle(fontSize: 14.sp).extrabold(),
-                      )
-                    ],
-                  ),
-                  SizedBox(width: 12.w),
-                  Row(
-                    children: [
-                      const Icon(
-                        CupertinoIcons.time,
-                        color: Forangcolor,
-                      ),
-                      Text(
-                        "20 min",
-                        style: TextStyle(fontSize: 14.sp).extrabold(),
-                      )
-                    ],
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.star,
+                          color: Forangcolor,
+                        ),
+                        Text(
+                          "4.7",
+                          style: TextStyle(fontSize: 14.sp).extrabold(),
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 12.w),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.delivery_dining_outlined,
+                          color: Forangcolor,
+                        ),
+                        Text(
+                          "Free",
+                          style: TextStyle(fontSize: 14.sp).extrabold(),
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 12.w),
+                    Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.time,
+                          color: Forangcolor,
+                        ),
+                        Text(
+                          "20 min",
+                          style: TextStyle(fontSize: 14.sp).extrabold(),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 2.h),
             ],
@@ -240,6 +251,164 @@ class CartviewingCard extends StatelessWidget {
               : const SizedBox(),
         )
       ],
+    );
+  }
+}
+
+class RestaurantsCardnet extends StatelessWidget {
+  final int index;
+  final String restaruntName;
+  final String category;
+  final double rating;
+  final bool open;
+  final String coverimage;
+  final String logoimage;
+  const RestaurantsCardnet(
+      {super.key,
+      required this.restaruntName,
+      required this.category,
+      required this.rating,
+      required this.open,
+      required this.coverimage,
+      required this.logoimage,
+      required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.gothrough(RestarunatsDetail(
+          index: index,
+        ));
+      },
+      child: Padding(
+        padding: EdgeInsets.only(top: 4.h, bottom: 8.h),
+        child: Stack(
+          children: [
+            SizedBox(
+              height: context.fullHeight < 650 ? 0.28.sh : 0.28.sh,
+              // width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.sp),
+                          color: Fbluecolor),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.sp),
+                        child: Image(
+                          image: NetworkImage(coverimage),
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 3.h),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(
+                      restaruntName,
+                      style: TextStyle(fontSize: 20.sp, color: Fblackcolor),
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(
+                      category,
+                      style: TextStyle(fontSize: 20.sp, color: Fblackcolor001),
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Row(
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              CupertinoIcons.star,
+                              color: Forangcolor,
+                            ),
+                            Text(
+                              rating.toString(),
+                              style: TextStyle(fontSize: 14.sp).extrabold(),
+                            )
+                          ],
+                        ),
+                        SizedBox(width: 12.w),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.delivery_dining_outlined,
+                              color: Forangcolor,
+                            ),
+                            Text(
+                              "Free",
+                              style: TextStyle(fontSize: 14.sp).extrabold(),
+                            )
+                          ],
+                        ),
+                        SizedBox(width: 12.w),
+                        Row(
+                          children: [
+                            const Icon(
+                              CupertinoIcons.time,
+                              color: Forangcolor,
+                            ),
+                            Text(
+                              "20 min",
+                              style: TextStyle(fontSize: 14.sp).extrabold(),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 2.h),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 60.h,
+              right: 10.w,
+              child: SizedBox(
+                height: 80.h,
+                width: 80.w,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Image(
+                      image: NetworkImage(logoimage),
+                      fit: BoxFit.cover,
+                    )),
+              ),
+            ),
+            open
+                ? const Material()
+                : Positioned(
+                    left: -20.w,
+                    top: 6.h,
+                    child: Transform.rotate(
+                      angle: -0.49,
+                      child: Container(
+                        width: 110.w,
+                        padding: const EdgeInsets.symmetric(vertical: 1),
+                        color: Fredcolor,
+                        child: const Center(
+                          child: Text(
+                            "CLOSED",
+                            style: TextStyle(color: Fwhitcolor),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+          ],
+        ),
+      ),
     );
   }
 }

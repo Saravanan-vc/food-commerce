@@ -21,3 +21,5 @@ const Color Fwhitecolor012 = Colors.white12;
 const Color Fredcolor = Colors.red;
 const Color FlighText = Color(0xFFFFA0A5BA);
 const Color Flightornagelir = Color.fromARGB(77, 247, 156, 99);
+const Color Fpink = Colors.pink;
+const Color Fpurple = Colors.purple;

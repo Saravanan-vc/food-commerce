@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food/api/callapi_api.dart';
+import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
-import 'package:food/view/home_view.dart';
+import 'package:food/util/appconst_util.dart';
+import 'package:food/util/sharedperference_mdel.dart';
+import 'package:food/view/home_view/home_view.dart';
 import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
 import 'package:food/view/login_onboarding_splash/verifiy_view.dart';
 import 'package:food/widgets/innerappmsg_widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 abstract class AuthenticationBluePrinte {
   // creating controller
@@ -69,6 +74,7 @@ class AuthenticationControllerLoginScreen extends ChangeNotifier
     obscuretext = !obscuretext;
     notifyListeners();
   }
+
 // checking keyboard
   RxBool isKeybord = false.obs;
 }
@@ -136,10 +142,42 @@ class AuthenticationControllerSignScreen extends ChangeNotifier
         password.isNotEmpty &&
         password.length > 6 &&
         name.isNotEmpty) {
-      context.gothrough(const LocationaccessView());
+      SharedperferenceMdel.saveusername(name);
+      debugPrint("TOUCHED THE BUTTON");
+      Map<String, String> body = {
+        "name": name,
+        "email": email,
+        "password": password
+      };
+      check(context, body);
+    }
+  }
+
+  void check(context, Map<String, String> body) async {
+    debugPrint("GOT COMPLETE HERE");
+    debugPrint(body.toString());
+    http.BaseResponse response =
+        await CallapiApi.postapi(AppconstUtil.sginIN, body);
+    if (response.statusCode == 201) {
+      debugPrint('STAUSCODE IS HERE ${response.statusCode}');
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LocationaccessView()));
+    } else if (response.statusCode == 300) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          behavior: SnackBarBehavior.floating,
+          elevation: 1,
+          margin: EdgeInsets.all(8),
+          backgroundColor: Fredcolor,
+          content: Text('Already have account'),
+        ),
+      );
+    } else {
+      debugPrint('STAUSCODE IS HERE ${response.statusCode}');
     }
   }
 
   // checking keyboard
   RxBool isKeybord = false.obs;
+
 }

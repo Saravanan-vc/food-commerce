@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food/api/showmessage_api.dart';
 import 'package:food/constains/food_constains.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
@@ -316,7 +314,7 @@ class ShowDailogWidget {
 
 // starting pop message
   static firstmessage(BuildContext context) async {
-    String? image = await ShowmessageApi().fetchpopmesage();
+   
     return showModalBottomSheet(
       isDismissible: false,
       enableDrag: false,
@@ -338,9 +336,7 @@ class ShowDailogWidget {
                 color: Ftranscolor,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.r),
-                  child: image!.isNotEmpty
-                      ? CachedNetworkImage(fit: BoxFit.fill, imageUrl: image)
-                      : Image.asset("assets/images/sales.jpg",
+                  child: Image.asset("assets/images/sales.jpg",
                           fit: BoxFit.fill),
                 ),
               ),

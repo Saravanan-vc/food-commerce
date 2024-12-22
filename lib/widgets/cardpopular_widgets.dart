@@ -88,13 +88,15 @@ class CardpopularWidgets extends StatelessWidget {
 
 class CardpopularWidgetsapi extends StatelessWidget {
   final String name;
+  final String url;
   final String chategory;
   final String price;
   const CardpopularWidgetsapi(
       {super.key,
       required this.name,
       required this.chategory,
-      required this.price});
+      required this.price,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +125,15 @@ class CardpopularWidgetsapi extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25.sp),
                   color: Fbluecolor),
+              child: url.isEmpty
+                  ? null
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(25.sp),
+                      child: Image(
+                        image: NetworkImage(url),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
             ),
             const Spacer(),
             Padding(

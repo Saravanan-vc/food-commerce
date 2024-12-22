@@ -1,19 +1,20 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food/api/showmessage_api.dart';
 import 'package:food/constains/food_constains.dart';
-import 'package:food/model/sharedperference_mdel.dart';
+import 'package:food/util/sharedperference_mdel.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
 import 'package:food/view/cart_editing_view.dart';
+import 'package:food/view/home_view/database/home_base.dart';
 import 'package:food/view/perfoilmenu_screen.dart';
 import 'package:food/view/search_view.dart';
-import 'package:food/widgets/rectanglechip_widget.dart';
 import 'package:food/widgets/restaurants_card.dart';
 import 'package:food/widgets/search_widgets.dart';
+import 'package:food/widgets/swithccolor_widgets.dart';
 import 'package:food/widgets/timerdecrese_widgets.dart';
 import 'package:get/get.dart';
 
@@ -26,14 +27,14 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Tutroial tutroial = Tutroial();
-  ShowmessageApi showmessageApi = Get.find<ShowmessageApi>(tag: "chip");
+
   TimerdecreseWidgets timerdecreseWidgets =
       Get.find<TimerdecreseWidgets>(tag: "timer");
+  HomeBase homeBase = Get.find<HomeBase>(tag: "homebase");
   String? valued = "Home";
   @override
   void initState() {
     SharedperferenceMdel.setinitalpermisiion();
-    showmessageApi.fetchingchip();
     timerdecreseWidgets.isbool.value = true;
     super.initState();
   }
@@ -124,16 +125,17 @@ class _HomeViewState extends State<HomeView> {
             Padding(
               padding: EdgeInsets.only(top: 24.h, left: 24.w),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Hey Hala, ",
+                    homeBase.name?.value ?? 'Hey Hi',
                     style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w300,
-                        color: Fblackcolor001),
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.w400,
+                        color: Fblackcolor),
                   ),
-                  Text("Good Afternoon",
+                  Text("  Good Afternoon",
                       style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
@@ -152,26 +154,40 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 25.h),
-              child: CarouselSlider.builder(
-                itemCount: foodList.length,
-                itemBuilder: (context, index, ind) {
-                  return Container(
-                    decoration: BoxDecoration(
+            Obx(
+              () => Padding(
+                padding: EdgeInsets.only(bottom: 25.h),
+                child: CarouselSlider.builder(
+                  itemCount: homeBase.carsoul.length,
+                  itemBuilder: (context, index, ind) {
+                    var image = homeBase.carsoul[index];
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
                         color: Fbluecolor,
-                        borderRadius: BorderRadius.circular(8.r)),
-                  );
-                },
-                options: CarouselOptions(
-                  onPageChanged: (index, r) {
-                    timerdecreseWidgets.currentIndex.value = index;
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.r),
+                        child: Image(
+                          image: NetworkImage(
+                            image,
+                          ),
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    );
                   },
-                  enlargeCenterPage: true,
-                  autoPlay: true,
-                  scrollDirection: Axis.horizontal,
-                  autoPlayCurve: Curves.ease,
-                  height: 200.h,
+                  options: CarouselOptions(
+                    onPageChanged: (index, r) {
+                      timerdecreseWidgets.currentIndex.value = index;
+                    },
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    scrollDirection: Axis.horizontal,
+                    autoPlayCurve: Curves.ease,
+                    height: 200.h,
+                  ),
                 ),
               ),
             ),
@@ -180,107 +196,114 @@ class _HomeViewState extends State<HomeView> {
               child: Obx(() {
                 return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: foodList.map((item) {
-                      debugPrint(
-                          "${timerdecreseWidgets.currentIndex.value}/$item");
+                    children: homeBase.carsoul.map((item) {
                       return Container(
                           margin: EdgeInsets.only(left: 10.w),
                           height: 20.r,
-                          width: foodList.indexOf(item) ==
+                          width: homeBase.carsoul.indexOf(item) ==
                                   timerdecreseWidgets.currentIndex.value
-                              ? 40.r
+                              ? 35.r
                               : 20.r,
                           decoration: BoxDecoration(
-                              color: Fbluecolor,
+                              color: homeBase.carsoul.indexOf(item) ==
+                                      timerdecreseWidgets.currentIndex.value
+                                  ? SwithccolorWidgets.correctcolor(
+                                      homeBase.carsoul.indexOf(item) + 1)
+                                  : Fbluecolor,
                               borderRadius: BorderRadius.circular(12.r)),
-                          child: foodList.indexOf(item) ==
+                          child: homeBase.carsoul.indexOf(item) ==
                                   timerdecreseWidgets.currentIndex.value
                               ? Center(
                                   child: Text(
-                                    "${timerdecreseWidgets.currentIndex.value}/${foodList.indexOf(item)}",
+                                    "${timerdecreseWidgets.currentIndex.value + 1}/${homeBase.carsoul.indexOf(item) + 1}",
                                     style: TextStyle(
                                         color: Fwhitcolor,
                                         fontWeight: FontWeight.w800,
-                                        fontSize: 14.sp),
+                                        fontSize: 11.sp),
                                   ),
                                 )
                               : null);
                     }).toList());
               }),
             ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 24.w),
+            //   child: Row(
+            //     children: [
+            //       Text(
+            //         "All Categories",
+            //         style: TextStyle(fontSize: 20.sp),
+            //       ),
+            //       const Spacer(),
+            //       // Text(
+            //       //   "See All",
+            //       //   style: TextStyle(fontSize: 20.sp),
+            //       // ),
+            //       const Icon(
+            //         Icons.arrow_right_outlined,
+            //         color: Fblackcolor,
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 24.w),
+            //   child: SizedBox(
+            //     height: 70.h,
+            //     child: Obx(
+            //       () {
+            //         debugPrint("${showmessageApi.foodchip.length}");
+            //         return ListView.builder(
+            //           scrollDirection: Axis.horizontal,
+            //           itemCount: showmessageApi.foodchip.isNotEmpty
+            //               ? showmessageApi.foodchip.length - 4
+            //               : 4,
+            //           itemBuilder: (context, index) {
+            //             return showmessageApi.foodchip.isNotEmpty
+            //                 ? RectanglechipWidget(
+            //                     title: showmessageApi.foodchip[index]
+            //                         ["category"])
+            //                 : const ShimmerWiedgets();
+            //           },
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Row(
-                children: [
-                  Text(
-                    "All Categories",
-                    style: TextStyle(fontSize: 20.sp),
-                  ),
-                  const Spacer(),
-                  // Text(
-                  //   "See All",
-                  //   style: TextStyle(fontSize: 20.sp),
-                  // ),
-                  const Icon(
-                    Icons.arrow_right_outlined,
-                    color: Fblackcolor,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 24.w),
-              child: SizedBox(
-                height: 70.h,
-                child: Obx(
-                  () {
-                    debugPrint("${showmessageApi.foodchip.length}");
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: showmessageApi.foodchip.isNotEmpty
-                          ? showmessageApi.foodchip.length - 4
-                          : 4,
-                      itemBuilder: (context, index) {
-                        return RectanglechipWidget(
-                          title: showmessageApi.foodchip.isNotEmpty
-                              ? showmessageApi.foodchip[index]["category"]
-                              : foodList[index],
-                        );
-                      },
-                    );
-                  },
+              padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 10.h),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Open Restaurants",
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 10.h),
-              child: Row(
-                children: [
-                  Text(
-                    "Open Restaurants",
-                    style: TextStyle(fontSize: 20.sp),
-                  ),
-                  const Spacer(),
-                  // Text(
-                  //   "See All",
-                  //   style: TextStyle(fontSize: 20.sp),
-                  // ),
-                  const Icon(
-                    Icons.arrow_right_outlined,
-                    color: Fblackcolor,
-                  )
-                ],
+            Obx(
+              () => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14.w),
+                child: ListView.separated(
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: 10.h,
+                        ),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: homeBase.restraunt.length,
+                    itemBuilder: (context, index) {
+                      var restarunt = homeBase.restraunt;
+                      return RestaurantsCardnet(
+                        index: index,
+                        restaruntName: restarunt[index]['name'],
+                        category: restarunt[index]['category'],
+                        rating: restarunt[index]['rating'],
+                        open: index == 2 ? false : restarunt[index]['open'],
+                        coverimage: restarunt[index]['coverimage'],
+                        logoimage: restarunt[index]['logoimage'],
+                      );
+                    }),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return const RestaurantsCard();
-                  }),
             ),
           ],
         ),
