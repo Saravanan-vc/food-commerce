@@ -11,6 +11,7 @@ class HomeBase extends GetxController {
   RxString? name = "".obs;
   RxList restraunt = [].obs;
   RxList carsoul = [].obs;
+  RxList subcategry = [].obs;
 
   Future getRestraunt() async {
     http.Response response = await CallapiApi.fetchapi(AppconstUtil.restarunt);

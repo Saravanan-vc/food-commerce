@@ -212,7 +212,7 @@ class RestarunatsDetail extends StatelessWidget {
                         child: CardpopularWidgetsapi(
                           url: menu[inde]['image'],
                           name: menu[inde]['name'],
-                          chategory: "fantistic",
+                          chategory: menu[inde]['subcategry'] ?? "fantistic",
                           price: menu[inde]['price'].toString(),
                         ),
                       );
