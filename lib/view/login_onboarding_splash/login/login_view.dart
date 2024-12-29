@@ -5,10 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/controller/authenticationprovider_controller.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/images_ui.dart';
-import 'package:food/view/login_onboarding_splash/forgot_view.dart';
+import 'package:food/view/login_onboarding_splash/forgot/screen/forgot_view.dart';
 import 'package:food/view/login_onboarding_splash/sigin_view.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/inputfield_widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatelessWidget {
@@ -16,11 +17,13 @@ class LoginView extends StatelessWidget {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    Get.find<AuthenticationControllerLoginScreen>().initit();
     return Consumer<AuthenticationControllerLoginScreen>(
       builder: (context, controllerALS, child) {
         (MediaQuery.viewInsetsOf(context).bottom != 0)
             ? controllerALS.isKeybord.value = true
             : controllerALS.isKeybord.value = false;
+
         return SafeArea(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -138,7 +141,7 @@ class LoginView extends StatelessWidget {
                                                   const ForgotView(),
                                             ),
                                           );
-                                          controllerALS.dispose();
+                                          // controllerALS.dispose();
                                         },
                                         color: Forangcolor,
                                       )

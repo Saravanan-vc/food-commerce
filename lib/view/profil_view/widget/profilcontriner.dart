@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
+import 'package:food/util/sharedperference_mdel.dart';
 
 class Profilcontriner extends HookWidget {
   final List user;
@@ -12,7 +13,7 @@ class Profilcontriner extends HookWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r), color: FlighBcolor),
-      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
+      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 1.h),
       margin: EdgeInsets.symmetric(horizontal: 24.w),
       child: ListView.builder(
         shrinkWrap: true,
@@ -47,6 +48,9 @@ class Profilcontriner extends HookWidget {
                 const Spacer(),
                 GestureDetector(
                     onTap: () {
+                      if (user[index][1].contains('Log Out')) {
+                        SharedperferenceMdel.setinitalpermisiion2();
+                      }
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => user[index][2]));
                     },

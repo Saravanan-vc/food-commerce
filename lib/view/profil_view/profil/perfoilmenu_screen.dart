@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/constains/userprofil_constains.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
-import 'package:food/widgets/profilcontriner.dart';
+import 'package:food/view/profil_view/widget/profilcontriner.dart';
 
 class PerfoilmenuScreen extends HookWidget {
   const PerfoilmenuScreen({super.key});

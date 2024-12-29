@@ -5,7 +5,7 @@ import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/view/detail_screen/locationview_detail.dart';
 import 'package:food/widgets/button_widgets.dart';
-import 'package:food/widgets/profilcontriner.dart';
+import 'package:food/view/profil_view/widget/profilcontriner.dart';
 
 class AddressviewDetail extends StatelessWidget {
   const AddressviewDetail({super.key});

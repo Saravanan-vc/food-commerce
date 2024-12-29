@@ -10,7 +10,7 @@ import 'package:food/ui/extension/overall_extension.dart';
 import 'package:food/ui/tutroial.dart';
 import 'package:food/view/cart_editing_view.dart';
 import 'package:food/view/home_view/database/home_base.dart';
-import 'package:food/view/perfoilmenu_screen.dart';
+import 'package:food/view/profil_view/profil/perfoilmenu_screen.dart';
 import 'package:food/view/search_view.dart';
 import 'package:food/widgets/restaurants_card.dart';
 import 'package:food/widgets/search_widgets.dart';

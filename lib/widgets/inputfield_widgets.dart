@@ -5,9 +5,11 @@ import 'package:food/ui/colors_ui.dart';
 
 class InputfieldWidgets extends StatelessWidget {
   final String hinttext;
+  final bool readonly;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   const InputfieldWidgets({
+    this.readonly = false,
     super.key,
     required this.hinttext,
     required this.controller,
@@ -23,6 +25,7 @@ class InputfieldWidgets extends StatelessWidget {
           color: FlighBcolor, borderRadius: BorderRadius.circular(10.r)),
       child: Center(
         child: TextFormField(
+          readOnly: readonly,
           validator: validator,
           controller: controller,
           decoration: InputDecoration(

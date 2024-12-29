@@ -1,15 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food/api/callapi_api.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
+import 'package:food/ui/mesager.dart';
 import 'package:food/util/appconst_util.dart';
 import 'package:food/util/sharedperference_mdel.dart';
 import 'package:food/view/home_view/home_view.dart';
 import 'package:food/view/login_onboarding_splash/locationaccess_view.dart';
-import 'package:food/view/login_onboarding_splash/verifiy_view.dart';
+import 'package:food/view/login_onboarding_splash/forgot/screen/verifiy_view.dart';
 import 'package:food/widgets/innerappmsg_widgets.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AuthenticationBluePrinte {
@@ -35,8 +37,8 @@ class AuthenticationControllerLoginScreen extends ChangeNotifier
   TextEditingController passwordtextediting = TextEditingController();
   @override
   void disposecontroller() {
-    emailtextediting.dispose();
-    passwordtextediting.dispose();
+    emailtextediting.clear();
+    passwordtextediting.clear();
   }
 
   @override
@@ -59,13 +61,25 @@ class AuthenticationControllerLoginScreen extends ChangeNotifier
       if (emailtext.isNotEmpty &&
           passwordtext.isNotEmpty &&
           RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(emailtext)) {
-        context.gothrough(const HomeView()).then(Dispose);
+        loginCredintal(emailtext, passwordtext, context);
       }
       if (!RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(emailtext)) {
         InnerappmsgWidgets.scaffoldMessage(context);
       }
     } catch (e) {
       debugPrint(e.toString());
+    }
+  }
+
+  Future<void> initit() async {
+    debugPrint("get data");
+    String? email = await SharedperferenceMdel.gettext("email");
+    String? password = await SharedperferenceMdel.gettext("password");
+    if (email != null && password != null) {
+      debugPrint("get data manage");
+      emailtextediting.text = email;
+      passwordtextediting.text = password;
+      notifyListeners();
     }
   }
 
@@ -77,6 +91,49 @@ class AuthenticationControllerLoginScreen extends ChangeNotifier
 
 // checking keyboard
   RxBool isKeybord = false.obs;
+// checking login credntial
+  Future<void> loginCredintal(String email, String password, context) async {
+    debugPrint("first call");
+    Map<String, String> body = {
+      "email": email,
+      "password": password,
+    };
+    try {
+      http.Response response =
+          await CallapiApi.postapi(AppconstUtil.loginIN, body);
+      var msg = jsonDecode(response.body);
+      if (response.statusCode == 350) {
+        debugPrint("second call");
+        Scafoldmessager.messagerCall(false, context, msg['msg']);
+      }
+      if (response.statusCode == 220) {
+        debugPrint("third call");
+        Scafoldmessager.messagerCall(false, context, msg['msg']);
+      } else {
+        if (response.statusCode == 320) {
+          debugPrint("four call");
+          Scafoldmessager.messagerCall(false, context, msg['msg']);
+        } else if (response.statusCode == 201) {
+          debugPrint("five call");
+          SharedperferenceMdel.setinitalpermisiion();
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const HomeView()));
+          if (_checkout) {
+            SharedperferenceMdel.stedata("email", email);
+            SharedperferenceMdel.stedata("password", password);
+          }
+          disposecontroller();
+          Scafoldmessager.messagerCall(true, context, msg['msg']);
+        } else {
+          debugPrint("six call");
+          Scafoldmessager.messagerCall(false, context, msg['msg']);
+        }
+      }
+    } catch (e) {
+      debugPrint("get int truble");
+      Scafoldmessager.messagerCall(false, context, "something goned wrong");
+    }
+  }
 }
 
 class AuthenticationControllerForgetnScreen extends ChangeNotifier
@@ -86,9 +143,30 @@ class AuthenticationControllerForgetnScreen extends ChangeNotifier
 
   TextEditingController get emailtext => _emailtextediting;
 
-  void checkthlogin(String text, BuildContext context) {
+  void checkthlogin(String text, BuildContext context) async {
     if (RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(text)) {
-      context.gothrough(const VerifiyView());
+      Map<String, String> body = {
+        "email": text,
+      };
+      http.Response response =
+          await CallapiApi.postapi(AppconstUtil.forgetIN, body);
+      var contant = jsonDecode(response.body);
+      try {
+        if (response.statusCode == 201) {
+          Scafoldmessager.messagerCall(true, context, contant['msg']);
+          context.gothrough(VerifiyView(
+            text: text,
+          ));
+        } else {
+          Scafoldmessager.messagerCall(false, context, contant['msg']);
+        }
+      } catch (e) {
+        Scafoldmessager.messagerCall(false, context, "something went wrong");
+      }
+    } else if (text.isEmpty) {
+      Scafoldmessager.messagerCall(false, context, "Email not should be empty");
+    } else {
+      Scafoldmessager.messagerCall(false, context, "Email not proper way");
     }
   }
 }
@@ -179,5 +257,4 @@ class AuthenticationControllerSignScreen extends ChangeNotifier
 
   // checking keyboard
   RxBool isKeybord = false.obs;
-
 }

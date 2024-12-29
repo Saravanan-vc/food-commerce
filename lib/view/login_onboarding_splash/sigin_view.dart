@@ -3,20 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/controller/authenticationprovider_controller.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/images_ui.dart';
+import 'package:food/view/login_onboarding_splash/forgot/controllers/verfiy_code.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/inputfield_widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class SiginView extends StatelessWidget {
-  const SiginView({super.key});
+  final bool forget;
+  const SiginView({super.key, this.forget = false});
 
   @override
   Widget build(BuildContext context) {
+    VerfiyCode verfiyCode = Get.find<VerfiyCode>(tag: 'verfiycode');
     return Consumer<AuthenticationControllerSignScreen>(
       builder: (context, controllerSV, child) {
         (MediaQuery.viewInsetsOf(context).bottom != 0)
             ? controllerSV.isKeybord.value = true
             : controllerSV.isKeybord.value = false;
+        forget
+            ? controllerSV.emailtextediting.text = verfiyCode.email.text
+            : null;
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Stack(
@@ -34,7 +41,7 @@ class SiginView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Login",
+                          forget ? "Forget" : "Login",
                           style: TextStyle(
                               fontSize: 30.sp,
                               fontWeight: FontWeight.w900,
@@ -44,7 +51,9 @@ class SiginView extends StatelessWidget {
                           height: 3.h,
                         ),
                         Text(
-                          "Please sign in to your existing account",
+                          forget
+                              ? "Please enter password do you want"
+                              : "Please sign in to your existing account",
                           style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.normal,
@@ -66,26 +75,36 @@ class SiginView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "NAME",
-                              style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.normal),
-                            ),
-                            InputfieldWidgets(
-                              hinttext: "JONE DOE",
-                              controller: controllerSV.nametextediting,
-                            ),
+                            forget
+                                ? const Material()
+                                : Text(
+                                    "NAME",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                            forget
+                                ? const Material()
+                                : InputfieldWidgets(
+                                    hinttext: "JONE DOE",
+                                    controller: controllerSV.nametextediting,
+                                  ),
                             Text(
                               "EMAIL",
                               style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.normal),
                             ),
-                            InputfieldWidgets(
-                              hinttext: "example@gmail.com",
-                              controller: controllerSV.emailtextediting,
-                            ),
+                            forget
+                                ? InputfieldWidgets(
+                                    readonly: true,
+                                    hinttext: "example@gmail.com",
+                                    controller: controllerSV.emailtextediting,
+                                  )
+                                : InputfieldWidgets(
+                                    hinttext: "example@gmail.com",
+                                    controller: controllerSV.emailtextediting,
+                                  ),
                             Text(
                               "PASSWORD",
                               style: TextStyle(
@@ -119,11 +138,16 @@ class SiginView extends StatelessWidget {
                             AbuttonWidget(
                               text: "LOGIN IN",
                               callback: () {
-                                controllerSV.gohomescreen(
-                                    controllerSV.emailtextediting.text,
-                                    controllerSV.passwordtextediting.text,
-                                    controllerSV.nametextediting.text,
-                                    context);
+                                forget
+                                    ? verfiyCode.updatepassword(
+                                        controllerSV.emailtextediting.text,
+                                        controllerSV.passwordtextediting.text,
+                                        context)
+                                    : controllerSV.gohomescreen(
+                                        controllerSV.emailtextediting.text,
+                                        controllerSV.passwordtextediting.text,
+                                        controllerSV.nametextediting.text,
+                                        context);
                               },
                             ),
                             controllerSV.isKeybord.value

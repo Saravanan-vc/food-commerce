@@ -8,7 +8,7 @@ class Scafoldmessager {
         elevation: 1,
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(8),
-        backgroundColor: get ? Fredcolor : Fwhitcolor,
+        backgroundColor: get ? Fgreencolor : Fredcolor,
         content: Text(data),
       ),
     );

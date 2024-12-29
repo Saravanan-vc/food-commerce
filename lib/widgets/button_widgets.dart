@@ -63,8 +63,9 @@ class AtextBwidget extends StatelessWidget {
 
 // UnderLine Button
 class Aunderbutton extends StatelessWidget {
+  final Color color;
   final VoidCallback ontap;
-  const Aunderbutton({super.key, required this.ontap});
+  const Aunderbutton({super.key, required this.ontap, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +74,16 @@ class Aunderbutton extends StatelessWidget {
         ontap();
       },
       child: Container(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: Fblackcolor),
+            bottom: BorderSide(color: color),
           ),
         ),
         child: Padding(
           padding: EdgeInsets.only(bottom: 2.h),
           child: Text(
             "RESEND",
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600,color: color),
           ),
         ),
       ),

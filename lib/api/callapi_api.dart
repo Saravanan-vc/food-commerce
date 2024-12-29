@@ -22,4 +22,10 @@ class CallapiApi extends GetxService {
         body: jsonEncode(body));
     return response;
   }
+
+  static Future<http.Response> paramsapi(String url) async {
+    String passurl = "${AppconstUtil.baseurl}$url";
+    http.Response response = await http.get(Uri.parse(passurl));
+    return response;
+  }
 }

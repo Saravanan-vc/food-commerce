@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/images_ui.dart';
+import 'package:food/view/login_onboarding_splash/forgot/controllers/verfiy_code.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:food/widgets/singelbox_widgets.dart';
 import 'package:food/widgets/timerdecrese_widgets.dart';
 import 'package:get/get.dart';
 
-class VerifiyView extends StatelessWidget {
-  const VerifiyView({super.key});
+class VerifiyView extends StatefulWidget {
+  final String text;
+  const VerifiyView({super.key, required this.text});
+
+  @override
+  State<VerifiyView> createState() => _VerifiyViewState();
+}
+
+class _VerifiyViewState extends State<VerifiyView> {
+  VerfiyCode verfiyCode = Get.find<VerfiyCode>(tag: 'verfiycode');
+  TimerdecreseWidgets timerdecreseWidgets =
+      Get.find<TimerdecreseWidgets>(tag: "timer");
+  @override
+  void initState() {
+    timerdecreseWidgets.timer();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    TimerdecreseWidgets timerdecreseWidgets =
-        Get.find<TimerdecreseWidgets>(tag: "timer");
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -41,7 +55,7 @@ class VerifiyView extends StatelessWidget {
                       height: 3.h,
                     ),
                     Text(
-                      "We have sent a code to your email \nexample@gmail.com",
+                      "We have sent a code to your email \n${widget.text}",
                       style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.normal,
@@ -73,7 +87,18 @@ class VerifiyView extends StatelessWidget {
                           ),
                           Wrap(
                             children: [
-                              Aunderbutton(ontap: () {}),
+                              Obx(() {
+                                return Aunderbutton(
+                                  ontap: timerdecreseWidgets.time.value == 0
+                                      ? () {
+                                          timerdecreseWidgets.time.value = 60;
+                                        }
+                                      : () {},
+                                  color: timerdecreseWidgets.time.value == 0
+                                      ? Forangcolor
+                                      : Fblackcolor,
+                                );
+                              }),
                               Obx(() {
                                 return Text(
                                     "  in ${timerdecreseWidgets.time.value}.s",
@@ -85,22 +110,26 @@ class VerifiyView extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 8.h),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             SingelboxWidgets(
+                              code: timerdecreseWidgets.code1,
                               backwards: false,
                               frontgo: true,
                             ),
                             SingelboxWidgets(
+                              code: timerdecreseWidgets.code2,
                               frontgo: true,
                               backwards: true,
                             ),
                             SingelboxWidgets(
+                              code: timerdecreseWidgets.code3,
                               frontgo: true,
                               backwards: true,
                             ),
                             SingelboxWidgets(
+                              code: timerdecreseWidgets.code4,
                               frontgo: false,
                               backwards: true,
                             ),
@@ -112,11 +141,10 @@ class VerifiyView extends StatelessWidget {
                         child: AbuttonWidget(
                           text: "SEND CODE",
                           callback: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const VerifiyView(),
-                            //   ),
-                            // );
+                            String code = timerdecreseWidgets.makecode();
+                            verfiyCode.checkcode(
+                                '$code/${widget.text}', context);
+                            timerdecreseWidgets.clear();
                           },
                         ),
                       ),

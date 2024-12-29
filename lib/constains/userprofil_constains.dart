@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/view/detail_screen/personalinfo_detail.dart';
+import 'package:food/view/login_onboarding_splash/login/login_view.dart';
 
 List userone = [
   [
@@ -27,7 +28,7 @@ List userthere = [
 ];
 
 List userfour = [
-  [Icons.output_rounded, "Log Out", () {}, Fbluecolor],
+  [Icons.output_rounded, "Log Out", LoginView(), Fbluecolor],
 ];
 
 List userinfo = [
