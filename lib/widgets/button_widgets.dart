@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 
-
 // container Button
 class AbuttonWidget extends StatelessWidget {
   final String text;
@@ -23,6 +22,8 @@ class AbuttonWidget extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
+                height: 0.8,
+                letterSpacing: 1.1,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 color: Fwhitcolor),
@@ -62,8 +63,9 @@ class AtextBwidget extends StatelessWidget {
 
 // UnderLine Button
 class Aunderbutton extends StatelessWidget {
+  final Color color;
   final VoidCallback ontap;
-  const Aunderbutton({super.key, required this.ontap});
+  const Aunderbutton({super.key, required this.ontap, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +74,52 @@ class Aunderbutton extends StatelessWidget {
         ontap();
       },
       child: Container(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: Fblackcolor),
+            bottom: BorderSide(color: color),
           ),
         ),
         child: Padding(
           padding: EdgeInsets.only(bottom: 2.h),
           child: Text(
             "RESEND",
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600,color: color),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// UnderLine Button
+class Aunderbutton1 extends StatelessWidget {
+  final VoidCallback ontap;
+  final String text;
+  final Color textcolor;
+  const Aunderbutton1(
+      {super.key,
+      required this.ontap,
+      required this.text,
+      required this.textcolor});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        ontap();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: textcolor),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 2.h),
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: 16.sp, fontWeight: FontWeight.w600, color: textcolor),
           ),
         ),
       ),
@@ -165,6 +203,44 @@ class AouterButton extends StatelessWidget {
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 color: Fwhitcolor),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//outer line color2
+class AouterButton1 extends StatelessWidget {
+  final String text;
+  final Color bodercolor;
+  final Color innercolor;
+  final VoidCallback callback;
+  final Color textcolor;
+  const AouterButton1(
+      {super.key,
+      required this.text,
+      required this.callback,
+      required this.bodercolor,
+      required this.innercolor,
+      required this.textcolor});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: callback,
+      child: Container(
+        height: 62.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: innercolor,
+            border: Border.all(width: 2, color: bodercolor)),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: 14.sp, fontWeight: FontWeight.bold, color: textcolor),
           ),
         ),
       ),

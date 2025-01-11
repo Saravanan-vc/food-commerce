@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +15,7 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -137,7 +137,21 @@ class SearchView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [CardpopularWidgets(), CardpopularWidgets()],
+                      children: [
+                        CardpopularWidgetsapi(
+                          url: '',
+                          name:"name",
+                          chategory: "chategory",
+                          price: "456",
+                        ),
+                        CardpopularWidgetsapi(
+                          url: "",
+                          name:"name",
+                          chategory: "chategory",
+                          price:
+                              "789",
+                        )
+                      ],
                     );
                   }),
             )

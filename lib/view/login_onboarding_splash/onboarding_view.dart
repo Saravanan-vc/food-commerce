@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food/ui/colors_ui.dart';
 import 'package:food/ui/extension/overall_extension.dart';
-import 'package:food/view/login_onboarding_splash/login_view.dart';
+import 'package:food/view/login_onboarding_splash/login/login_view.dart';
 import 'package:food/widgets/button_widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
